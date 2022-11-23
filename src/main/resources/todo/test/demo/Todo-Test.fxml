@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.BorderPane?>
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="417.0" prefWidth="663.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.test.demo.ToDoController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+
+            <menus>
+                <Menu mnemonicParsing="false" text="File">
+                    <MenuItem mnemonicParsing="false" text="Close"/>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                    <MenuItem fx:id="menuAddTab" mnemonicParsing="false" onAction="#addTab" text="Add Tab"/>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Tabs">
+                    <items>
+                        <Menu mnemonicParsing="false" text="Change Tab Theme">
+                            <items>
+                                <!--Tab Themes -->
+                                <MenuItem fx:id="theme1" mnemonicParsing="false" onAction="#changeTheme"
+                                          text="Theme 1"/>
+                                <MenuItem fx:id="theme2" mnemonicParsing="false" onAction="#changeTheme"
+                                          text="Theme 2"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Change Tab Color">
+                            <items>
+                                <!--Tab Colors-->
+                                <MenuItem fx:id="tabPurple" mnemonicParsing="false" onAction="#changeTabColor"
+                                          text="Purple"/>
+                                <MenuItem fx:id="tabSilver" mnemonicParsing="false" onAction="#changeTabColor"
+                                          text="Silver"/>
+                            </items>
+                        </Menu>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <MenuItem mnemonicParsing="false" text="About"/>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+    <center>
+        <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" side="LEFT" tabClosingPolicy="UNAVAILABLE"
+                 BorderPane.alignment="CENTER"/>
+    </center>
+</BorderPane>
