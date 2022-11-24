@@ -81,5 +81,10 @@ public class ToDoController {
 			tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.SELECTED_TAB);
 		}
 	}
+
+	public void saveState(ActionEvent event) {
+		// TODO: add saving logic
+		
+	}
 }
 

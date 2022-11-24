@@ -39,6 +39,7 @@ public class TabTemplateController {
 		colCompleted.setCellValueFactory(c -> c.getValue().completedProperty());
 		table.setItems(Main.todoList);
 
+		datePicker.setMaxWidth(110);
 		// displays selected task in view window when selected from table
 		table.getSelectionModel().getSelectedItems().addListener((ListChangeListener<TodoTask>) c -> {
 			taskSelected();
