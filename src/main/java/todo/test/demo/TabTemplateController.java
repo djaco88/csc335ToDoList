@@ -27,8 +27,6 @@ public class TabTemplateController {
 	private Spinner spinMin;
 	@FXML
 	private CheckBox chkCompleted;
-	@FXML
-	private Button btnSubmit;
 
 	@FXML
 	void initialize() {
@@ -44,6 +42,10 @@ public class TabTemplateController {
 		table.getSelectionModel().getSelectedItems().addListener((ListChangeListener<TodoTask>) c -> {
 			taskSelected();
 		});
+
+
+		spinHour.setPromptText("HH");
+		spinMin.setPromptText("MM");
 	}
 
 	public void taskSelected() {
