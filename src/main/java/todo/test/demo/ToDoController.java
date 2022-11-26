@@ -34,6 +34,10 @@ public class ToDoController {
 		addTab();
 	}
 
+	private void loadFromSave() {
+		// TODO: add load logic
+	}
+
 	public void addTab() {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setController(new TabTemplateController());
@@ -86,7 +90,7 @@ public class ToDoController {
 
 	public void saveState() {
 		// TODO: add saving logic
-		
+
 	}
 
 	public void closeWindow() {

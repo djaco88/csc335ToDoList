@@ -1,8 +1,6 @@
 package todo.test.demo;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,8 +8,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-
-	public static final ObservableList<TodoTask> todoList = FXCollections.observableArrayList();
 
 	@Override
 	public void start(Stage stage) throws IOException {

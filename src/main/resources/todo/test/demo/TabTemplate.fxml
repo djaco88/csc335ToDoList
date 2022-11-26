@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <AnchorPane id="TaskAnchorPane" fx:id="anchorPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308"
             prefHeight="375.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             xmlns:fx="http://javafx.com/fxml/1" fx:controller="todo.test.demo.TabTemplateController">
 
 
     <!--    Formatting     -->
-    <SplitPane dividerPositions="0.9021516393442623, 0.5" orientation="VERTICAL" prefHeight="375.0" prefWidth="668.0"
+    <SplitPane dividerPositions="0.9021516393442623" orientation="VERTICAL" prefHeight="375.0" prefWidth="668.0"
                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                AnchorPane.topAnchor="0.0">
         <SplitPane dividerPositions="0.29797979797979796" prefHeight="374.4" prefWidth="571.2">
@@ -19,8 +18,7 @@
                 <!--    Table     -->
                 <TableView id="TaskTable" fx:id="table" layoutX="-16.0" layoutY="77.0" prefHeight="373.0"
                            prefWidth="182.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0"
-                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0"
-                           AnchorPane.topAnchor="0.0">
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
                     <columns>
                         <TableColumn fx:id="colNote" prefWidth="75.0" text="Note Title"/>
                         <TableColumn fx:id="colDate" prefWidth="75.0" text="Date"/>
@@ -36,27 +34,24 @@
                     <TextField fx:id="txtTitle" promptText="Title"/>
                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="395.0">
                         <TextArea fx:id="txtTask" layoutY="8.0" prefHeight="319.2" prefWidth="395.2"
-                                  promptText="Task goes here" wrapText="true"
-                                  AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                  AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                                  promptText="Task goes here" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
                     </AnchorPane>
                 </SplitPane>
             </AnchorPane>
         </SplitPane>
-        <HBox alignment="BOTTOM_CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" spacing="10.0"
-              SplitPane.resizableWithParent="false">
+        <HBox alignment="BOTTOM_CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0"
+              prefWidth="688.0" spacing="10.0" SplitPane.resizableWithParent="false">
             <!--    User Controllers     -->
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </padding>
             <Button fx:id="newTaskButton" mnemonicParsing="false" onAction="#newTask" text="Clear"/>
             <Label text="Date:"/>
-            <DatePicker fx:id="datePicker" maxWidth="150.0" HBox.hgrow="NEVER"/>
-            <Label layoutX="68.0" layoutY="23.0" text="HH:"/>
-            <Spinner fx:id="spinHour" editable="true" prefHeight="26.0" prefWidth="54.0"/>
-            <Label layoutX="268.0" layoutY="23.0" text="MM:"/>
-            <Spinner fx:id="spinMin" editable="true" prefHeight="26.0" prefWidth="54.0"/>
-            <ComboBox prefWidth="50.0" promptText="AM/PM"/>
+            <DatePicker fx:id="datePicker" maxWidth="150.0" onAction="#displayTime" HBox.hgrow="NEVER"/>
+            <Spinner fx:id="spinHour" editable="true" prefHeight="26.0" prefWidth="60.0" promptText="HH"/>
+            <Spinner fx:id="spinMin" editable="true" prefHeight="26.0" prefWidth="60.0" promptText="MM"/>
+            <Spinner fx:id="spinAMPM" editable="true" prefHeight="26.0" prefWidth="80" promptText="AM/PM"/>
             <CheckBox fx:id="chkCompleted" mnemonicParsing="false" text="Completed"/>
             <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#addTask" text="Submit"/>
             <!--    Formatting     -->

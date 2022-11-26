@@ -5,12 +5,22 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
+import java.time.LocalDate;
+
 public class TodoTask {
 
 	private StringProperty title;
 	private StringProperty description;
 	private BooleanProperty completed;
 	private StringProperty dueDisplay;
+	private LocalDate dueDate;
+
+	public TodoTask(String title, String description, boolean completed, LocalDate dueDate) {
+		this.title = new SimpleStringProperty(title);
+		this.description = new SimpleStringProperty(description);
+		this.completed = new SimpleBooleanProperty(completed);
+		this.dueDate = dueDate;
+	}
 
 	public TodoTask(String title, String description, boolean completed, String dueDisplay) {
 		this.title = new SimpleStringProperty(title);
