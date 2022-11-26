@@ -9,13 +9,13 @@
 
             <Menu mnemonicParsing="false" text="File">
                 <MenuItem fx:id="menuSave" mnemonicParsing="false" onAction="#saveState" text="Save"/>
-                <MenuItem mnemonicParsing="false" text="Close"/>
+                <MenuItem fx:id = "menuClose" mnemonicParsing="false" onAction="#closeWindow" text="Close"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Edit">
                 <MenuItem fx:id="menuAddTab" mnemonicParsing="false" onAction="#addTab" text="Add Tab"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Tabs">
-                <Menu mnemonicParsing="false" text="Change Tab Theme">
+                <Menu fx:id="menuChangeTheme" mnemonicParsing="false" text="Change Tab Theme">
                     <!--Tab Themes -->
                     <MenuItem fx:id="theme1" mnemonicParsing="false" onAction="#changeTheme" text="Theme 1"/>
                     <MenuItem fx:id="theme2" mnemonicParsing="false" onAction="#changeTheme" text="Theme 2"/>

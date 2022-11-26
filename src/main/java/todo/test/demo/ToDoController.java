@@ -4,6 +4,7 @@ package todo.test.demo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
@@ -15,6 +16,8 @@ import java.io.IOException;
 public class ToDoController {
 
 
+	@FXML
+	private Menu menuChangeTheme;
 	@FXML
 	private BorderPane borderPane;
 
@@ -36,7 +39,7 @@ public class ToDoController {
 		loader.setController(new TabTemplateController());
 		try {
 			Tab newTab = new Tab();
-			newTab.setContent(loader.load(getClass().getResource("TabTemplate.fxml")));
+			newTab.setContent(FXMLLoader.load(getClass().getResource("TabTemplate.fxml")));
 			newTab.setText("New Tab");
 			newTab.setOnClosed(e -> updateClosable());
 			tabPane.getTabs().add(tabPane.getTabs().size(), newTab);
@@ -53,7 +56,6 @@ public class ToDoController {
 		MenuItem callingItem = (MenuItem) event.getSource();
 		Tab tab = tabPane.getSelectionModel().getSelectedItem();
 
-//		tab.setStyle("-fx-background-color: slateblue; -fx-text-fill: white;");
 		switch (callingItem.getId()) {
 			case "tabPurple" -> tab.setStyle("-fx-background-color: slateblue; ");
 			case "tabSilver" -> tab.setStyle("-fx-background-color: silver; ");
@@ -82,9 +84,25 @@ public class ToDoController {
 		}
 	}
 
-	public void saveState(ActionEvent event) {
+	public void saveState() {
 		// TODO: add saving logic
 		
 	}
+
+	public void closeWindow() {
+		// TODO: add exit saving state logic
+
+		System.exit(0);
+	}
+
+	// TODO: implement adding themes dynamically
+	private void addThemesDynamically() {
+		MenuItem theme3 = new MenuItem("Theme 3");
+		theme3.setId("theme3");
+		theme3.idProperty().setValue("theme3");
+		theme3.setOnAction(this::changeTheme);
+		menuChangeTheme.getItems().add(theme3);
+	}
+
 }
 
