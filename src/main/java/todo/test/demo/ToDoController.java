@@ -4,10 +4,7 @@ package todo.test.demo;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 
@@ -31,6 +28,7 @@ public class ToDoController {
 		//TODO: to update style for whole window update CSS Sheet for borderPane
 //		borderPane.getStylesheets().clear();
 //		borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
+
 		addTab();
 	}
 
@@ -90,7 +88,6 @@ public class ToDoController {
 
 	public void saveState() {
 		// TODO: add saving logic
-
 	}
 
 	public void closeWindow() {
@@ -108,5 +105,13 @@ public class ToDoController {
 		menuChangeTheme.getItems().add(theme3);
 	}
 
+	public void renameTab(ActionEvent event) {
+		Tab tab = tabPane.getSelectionModel().getSelectedItem();
+		TextInputDialog input = new TextInputDialog("Tab Name");
+		input.setHeaderText("Enter New Tab Name:");
+		input.showAndWait();
+		if (input.getResult() != null)
+			tab.setText(input.getEditor().getText());
+	}
 }
 

@@ -6,27 +6,30 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class TodoTask {
 
-	private LocalTime time;
-	private LocalDate dueDate;
-	private StringProperty title;
-	private StringProperty description;
-	private BooleanProperty completed;
+	private final LocalTime time;
+	private final LocalDate dueDate;
+	private final StringProperty title;
+	private final StringProperty description;
+	private final BooleanProperty completed;
 	private StringProperty dueDisplay;
-	private LocalDateTime dueDateTime;
 
+
+	// Constructor without time. Date can be null
 	public TodoTask(String title, String description, boolean completed, LocalDate dueDate) {
 		this.title = new SimpleStringProperty(title);
 		this.description = new SimpleStringProperty(description);
 		this.completed = new SimpleBooleanProperty(completed);
-		this.dueDisplay = new SimpleStringProperty(dueDate.toString());
+		if (dueDate != null)
+			this.dueDisplay = new SimpleStringProperty(dueDate.toString());
 		this.dueDate = dueDate;
+		this.time = null;
 	}
 
+	// Constructor with time.
 	public TodoTask(String title, String description, boolean completed, LocalDate dueDate, String hourValue, String minValue, String timeOfDay) {
 		this.title = new SimpleStringProperty(title);
 		this.description = new SimpleStringProperty(description);
@@ -38,7 +41,6 @@ public class TodoTask {
 		else
 			time = LocalTime.of(Integer.parseInt(hourValue), Integer.parseInt(minValue));
 
-		dueDateTime = LocalDateTime.of(dueDate, time);
 	}
 
 	public String getTitle() {
@@ -53,10 +55,6 @@ public class TodoTask {
 		return description.get();
 	}
 
-	public StringProperty descriptionProperty() {
-		return description;
-	}
-
 	public boolean isCompleted() {
 		return completed.get();
 	}
@@ -65,16 +63,8 @@ public class TodoTask {
 		return completed;
 	}
 
-	public String getDueDisplay() {
-		return dueDisplay.get();
-	}
-
 	public StringProperty dueDisplayProperty() {
 		return dueDisplay;
-	}
-
-	public LocalDateTime getDueDateTime() {
-		return dueDateTime;
 	}
 
 	public LocalDate getDate() {
