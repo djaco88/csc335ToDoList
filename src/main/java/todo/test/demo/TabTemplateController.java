@@ -8,11 +8,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 
+import java.time.LocalTime;
+
 public class TabTemplateController {
 
 
 	private ObservableList<TodoTask> taskList;
-
 
 	@FXML
 	private TableView<TodoTask> table;
@@ -29,11 +30,11 @@ public class TabTemplateController {
 	@FXML
 	private DatePicker datePicker;
 	@FXML
-	private Spinner<String> spinHour;
+	private ChoiceBox<String> boxAMPM;
 	@FXML
-	private Spinner<String> spinMin;
+	private ChoiceBox<String> boxMin;
 	@FXML
-	private Spinner<String> spinAMPM;
+	private ChoiceBox<String> boxHR;
 	@FXML
 	private CheckBox chkCompleted;
 
@@ -47,22 +48,26 @@ public class TabTemplateController {
 	private void setupDateTime() {
 		datePicker.setMaxWidth(110);
 
-		timeVisible(false);
-		ObservableList<String> hourList = FXCollections.observableArrayList("");
+		setTimeVisible(false);
+		ObservableList<String> hourList = FXCollections.observableArrayList("HH");
 		for (int i = 1; i <= 12; i++)
 			hourList.add(Integer.toString(i));
-		spinHour.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(hourList));
 
-		ObservableList<String> minList = FXCollections.observableArrayList("");
+		ObservableList<String> minList = FXCollections.observableArrayList("MM");
 		for (int i = 0; i < 60; i++) {
-			if (i < 10)
-				minList.add("0" + i);
-			else
-				minList.add(Integer.toString(i));
+			if (i % 5 == 0)
+				if (i < 10)
+					minList.add("0" + i);
+				else
+					minList.add(Integer.toString(i));
 		}
 
-		spinMin.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(minList));
-		spinAMPM.setValueFactory(new SpinnerValueFactory.ListSpinnerValueFactory<>(FXCollections.observableArrayList("", "AM", "PM")));
+		boxHR.setItems(FXCollections.observableArrayList(hourList));
+		boxHR.setValue(boxHR.getItems().get(0));
+		boxMin.setItems(FXCollections.observableArrayList(minList));
+		boxMin.setValue(boxMin.getItems().get(0));
+		boxAMPM.setItems(FXCollections.observableArrayList("AM/PM", "AM", "PM"));
+		boxAMPM.setValue(boxAMPM.getItems().get(0));
 	}
 
 	private void setupTable() {
@@ -70,7 +75,6 @@ public class TabTemplateController {
 		colDate.setCellValueFactory(c -> c.getValue().dueDisplayProperty());
 		colCompleted.setCellFactory(CheckBoxTableCell.forTableColumn(colCompleted));
 		colCompleted.setCellValueFactory(c -> c.getValue().completedProperty());
-
 		taskList = FXCollections.observableArrayList();
 		table.setItems(taskList);
 
@@ -78,44 +82,62 @@ public class TabTemplateController {
 		table.getSelectionModel().getSelectedItems().addListener((ListChangeListener<TodoTask>) c -> taskSelected());
 	}
 
-	public void taskSelected() {
+	private void taskSelected() {
+		clearPrompts();
 		TodoTask task = table.getSelectionModel().getSelectedItem();
 		txtTitle.setText(task.getTitle());
 		txtTask.setText(task.getDescription());
+		datePicker.setValue(task.getDate());
+		LocalTime time = task.getTime();
+		if (time != null) {
+			if (task.getTime().getHour() > 12) {
+				boxHR.setValue(String.valueOf(task.getTime().getHour() - 12));
+				boxAMPM.setValue(boxAMPM.getItems().get(2));
+			} else {
+				boxHR.setValue(String.valueOf(task.getTime().getHour()));
+				boxAMPM.setValue(boxAMPM.getItems().get(1));
+			}
+			boxMin.setValue(String.valueOf(task.getTime().getMinute()));
+		}
 		chkCompleted.setSelected(task.isCompleted());
 	}
 
-	public void newTask() {
-		clearPrompts();
-	}
-
 	public void addTask() {
-		String due = "";
 
-		if (datePicker.getValue() != null)
-			due = datePicker.getValue().toString();
-		taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(), due));
+		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
+			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(), datePicker.getValue()));
+		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
+			// TODO: Throw error
+			System.out.println("TIME ERROR");
+		} else
+			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
+					datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
+
 		clearPrompts();
 	}
 
+	@FXML
 	private void clearPrompts() {
 		txtTask.clear();
 		txtTask.setPromptText("Task goes here");
 		txtTitle.clear();
 		txtTitle.setPromptText("Task Title");
 		datePicker.setValue(null);
+		boxHR.setValue(boxHR.getItems().get(0));
+		boxMin.setValue(boxMin.getItems().get(0));
+		boxAMPM.setValue(boxAMPM.getItems().get(0));
 		chkCompleted.setSelected(false);
 	}
 
-	public void displayTime(ActionEvent event) {
+	@FXML
+	private void displayTime(ActionEvent event) {
 		DatePicker date = (DatePicker) event.getSource();
-		timeVisible(date.getValue() != null);
+		setTimeVisible(date.getValue() != null);
 	}
 
-	private void timeVisible(boolean visible) {
-		spinHour.setVisible(visible);
-		spinMin.setVisible(visible);
-		spinAMPM.setVisible(visible);
-//		lblAMPM.setVisible(visible);
+	private void setTimeVisible(boolean visible) {
+		boxMin.setVisible(visible);
+		boxHR.setVisible(visible);
+		boxAMPM.setVisible(visible);
 	}
 }

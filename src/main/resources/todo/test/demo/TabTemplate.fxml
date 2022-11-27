@@ -46,12 +46,12 @@
             <padding>
                 <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
             </padding>
-            <Button fx:id="newTaskButton" mnemonicParsing="false" onAction="#newTask" text="Clear"/>
+            <Button mnemonicParsing="false" onAction="#clearPrompts" text="Clear"/>
             <Label text="Date:"/>
             <DatePicker fx:id="datePicker" maxWidth="150.0" onAction="#displayTime" HBox.hgrow="NEVER"/>
-            <Spinner fx:id="spinHour" editable="true" prefHeight="26.0" prefWidth="60.0" promptText="HH"/>
-            <Spinner fx:id="spinMin" editable="true" prefHeight="26.0" prefWidth="60.0" promptText="MM"/>
-            <Spinner fx:id="spinAMPM" editable="true" prefHeight="26.0" prefWidth="80" promptText="AM/PM"/>
+            <ChoiceBox fx:id="boxHR" prefWidth="60.0"/>
+            <ChoiceBox fx:id="boxMin" prefWidth="60.0"/>
+            <ChoiceBox fx:id="boxAMPM" prefWidth="75.0"/>
             <CheckBox fx:id="chkCompleted" mnemonicParsing="false" text="Completed"/>
             <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#addTask" text="Submit"/>
             <!--    Formatting     -->
