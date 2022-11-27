@@ -181,4 +181,9 @@ public class TabTemplateController {
 		table.getSelectionModel().clearSelection();
 		chkCompleted.setSelected(false);
 	}
+
+	public void saveData() {
+		//TODO implement save data
+		System.out.println(taskList);
+	}
 }

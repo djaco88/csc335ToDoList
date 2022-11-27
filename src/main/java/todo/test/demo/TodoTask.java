@@ -95,4 +95,9 @@ public class TodoTask {
 		return dueDisplay;
 	}
 
+	@Override
+	public String toString() {
+		return "TodoTask{" + "title=" + title + ", description=" + description + ", completed=" + completed + ", " +
+				"dueDisplay=" + dueDisplay + ", time=" + time + ", date=" + date + "}";
+	}
 }

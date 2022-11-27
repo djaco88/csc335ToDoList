@@ -10,6 +10,7 @@ import javafx.scene.layout.BorderPane;
 
 import java.io.IOException;
 
+
 public class ToDoController {
 
 
@@ -72,7 +73,11 @@ public class ToDoController {
 	}
 
 	public void saveState() {
-		// TODO: add saving logic
+		// TODO: Implement save data
+		for (Tab tab : tabPane.getTabs()) {
+			TabTemplateController temp = (TabTemplateController) tab.getContent().getUserData();
+			temp.saveData();
+		}
 	}
 
 	public void closeWindow() {

@@ -7,6 +7,9 @@
             maxHeight="1.7976931348623157E308"
             maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="700.0"
             xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="todo.test.demo.TabTemplateController">
+    <userData>
+        <fx:reference source="controller"/>
+    </userData>
 
 
     <!--    Formatting     -->
