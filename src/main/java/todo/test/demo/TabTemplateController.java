@@ -12,9 +12,7 @@ import java.time.LocalTime;
 
 public class TabTemplateController {
 
-
 	private ObservableList<TodoTask> taskList;
-
 	@FXML
 	private TableView<TodoTask> table;
 	@FXML
@@ -53,6 +51,9 @@ public class TabTemplateController {
 		for (int i = 1; i <= 12; i++)
 			hourList.add(Integer.toString(i));
 
+		boxHR.setItems(FXCollections.observableArrayList(hourList));
+		boxHR.setValue(boxHR.getItems().get(0));
+
 		ObservableList<String> minList = FXCollections.observableArrayList("MM");
 		for (int i = 0; i < 60; i++) {
 			if (i % 5 == 0)
@@ -61,11 +62,9 @@ public class TabTemplateController {
 				else
 					minList.add(Integer.toString(i));
 		}
-
-		boxHR.setItems(FXCollections.observableArrayList(hourList));
-		boxHR.setValue(boxHR.getItems().get(0));
 		boxMin.setItems(FXCollections.observableArrayList(minList));
 		boxMin.setValue(boxMin.getItems().get(0));
+
 		boxAMPM.setItems(FXCollections.observableArrayList("AM/PM", "AM", "PM"));
 		boxAMPM.setValue(boxAMPM.getItems().get(0));
 	}
