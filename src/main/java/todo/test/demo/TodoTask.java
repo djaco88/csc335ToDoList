@@ -10,41 +10,61 @@ import java.time.LocalTime;
 
 public class TodoTask {
 
-	private final LocalTime time;
-	private final LocalDate dueDate;
 	private final StringProperty title;
 	private final StringProperty description;
 	private final BooleanProperty completed;
-	private StringProperty dueDisplay;
+	private final StringProperty dueDisplay;
+	private LocalTime time;
+	private LocalDate date;
 
 
 	// Constructor without time. Date can be null
-	public TodoTask(String title, String description, boolean completed, LocalDate dueDate) {
+	public TodoTask(String title, String description, boolean completed, LocalDate date) {
 		this.title = new SimpleStringProperty(title);
 		this.description = new SimpleStringProperty(description);
 		this.completed = new SimpleBooleanProperty(completed);
-		if (dueDate != null)
-			this.dueDisplay = new SimpleStringProperty(dueDate.toString());
-		this.dueDate = dueDate;
+		if (date != null) this.dueDisplay = new SimpleStringProperty(date.toString());
+		else this.dueDisplay = new SimpleStringProperty();
+		this.date = date;
 		this.time = null;
 	}
 
 	// Constructor with time.
-	public TodoTask(String title, String description, boolean completed, LocalDate dueDate, String hourValue, String minValue, String timeOfDay) {
+	public TodoTask(String title, String description, boolean completed, LocalDate date, String hourValue,
+	                String minValue, String timeOfDay) {
 		this.title = new SimpleStringProperty(title);
 		this.description = new SimpleStringProperty(description);
 		this.completed = new SimpleBooleanProperty(completed);
-		this.dueDisplay = new SimpleStringProperty(dueDate.toString());
-		this.dueDate = dueDate;
-		if (timeOfDay.contains("P"))
-			time = LocalTime.of(Integer.parseInt(hourValue) + 12, Integer.parseInt(minValue));
-		else
-			time = LocalTime.of(Integer.parseInt(hourValue), Integer.parseInt(minValue));
+		this.dueDisplay = new SimpleStringProperty(date.toString());
+		this.date = date;
+		if (timeOfDay.contains("P")) time = LocalTime.of(Integer.parseInt(hourValue) + 12, Integer.parseInt(minValue));
+		else time = LocalTime.of(Integer.parseInt(hourValue), Integer.parseInt(minValue));
 
+	}
+
+	public LocalTime getTime() {
+		return time;
+	}
+
+	public void setTime(LocalTime time) {
+		this.time = time;
+	}
+
+	public LocalDate getDate() {
+		return date;
+	}
+
+	public void setDate(LocalDate date) {
+		if (date != null) this.dueDisplay.setValue(date.toString());
+		this.date = date;
 	}
 
 	public String getTitle() {
 		return title.get();
+	}
+
+	public void setTitle(String title) {
+		this.title.set(title);
 	}
 
 	public StringProperty titleProperty() {
@@ -55,8 +75,16 @@ public class TodoTask {
 		return description.get();
 	}
 
+	public void setDescription(String description) {
+		this.description.set(description);
+	}
+
 	public boolean isCompleted() {
 		return completed.get();
+	}
+
+	public void setCompleted(boolean completed) {
+		this.completed.set(completed);
 	}
 
 	public BooleanProperty completedProperty() {
@@ -67,11 +95,4 @@ public class TodoTask {
 		return dueDisplay;
 	}
 
-	public LocalDate getDate() {
-		return dueDate;
-	}
-
-	public LocalTime getTime() {
-		return time;
-	}
 }
