@@ -27,7 +27,7 @@ public class ToDoController {
 	void initialize() {
 		//TODO: to update style for whole window update CSS Sheet for borderPane
 		borderPane.getStylesheets().clear();
-		borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
+		borderPane.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 		addTab();
 	}
 
@@ -102,6 +102,7 @@ public class ToDoController {
 		String style = null;
 		switch (callingItem.getId()) {
 			case "DarkTheme" -> style = "DarkTheme.css";
+			case "LightTheme" -> style = "LightTheme.css";
 			case "RedTheme" -> style = "RedTheme.css";
 			case "OrangeTheme" -> style = "OrangeTheme.css";
 			case "YellowTheme" -> style = "YellowTheme.css";

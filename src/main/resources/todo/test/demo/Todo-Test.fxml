@@ -20,6 +20,7 @@
                 <Menu fx:id="menuChangeTheme" mnemonicParsing="false" text="Change Tab Theme">
                     <!--Tab Themes -->
                     <MenuItem fx:id="DarkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Dark Theme"/>
+                    <MenuItem fx:id="LightTheme" mnemonicParsing="false" onAction="#changeTheme" text="Light Theme"/>
                     <MenuItem fx:id="RedTheme" mnemonicParsing="false" onAction="#changeTheme" text="Red Theme"/>
                     <MenuItem fx:id="OrangeTheme" mnemonicParsing="false" onAction="#changeTheme" text="Orange Theme"/>
                     <MenuItem fx:id="YellowTheme" mnemonicParsing="false" onAction="#changeTheme" text="Yellow Theme"/>
