@@ -103,7 +103,7 @@ public class ToDoController {
 
 		String style = null;
 		switch (callingItem.getId()) {
-			case "theme1" -> style = "DarkTheme.css";
+			case "theme1" -> style = "PurpleTheme.css";
 			case "theme2" -> style = "GreenTheme.css";
 			case "Dark Theme" -> style = "DarkTheme.css";
 		}
