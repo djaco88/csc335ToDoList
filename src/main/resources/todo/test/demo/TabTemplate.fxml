@@ -3,76 +3,70 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="TaskAnchorPane" fx:id="anchorPane" prefHeight="400.0"
-            prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
-            fx:controller="todo.test.demo.TabTemplateController">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" id="TaskAnchorPane"
+            maxHeight="1.7976931348623157E308"
+            maxWidth="1.7976931348623157E308" prefHeight="375.0" prefWidth="700.0"
+            xmlns="http://javafx.com/javafx/17.0.2-ea" fx:controller="todo.test.demo.TabTemplateController">
+    <userData>
+        <fx:reference source="controller"/>
+    </userData>
 
 
-    <children>
-        <!--    Formatting     -->
-        <SplitPane dividerPositions="0.9021516393442623" orientation="VERTICAL" AnchorPane.bottomAnchor="0.0"
-                   AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-            <items>
-                <SplitPane dividerPositions="0.29797979797979796" prefHeight="374.4" prefWidth="571.2">
-                    <items>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"
-                                    SplitPane.resizableWithParent="false">
-                            <children>
-                                <!--    Table     -->
-                                <TableView id="TaskTable" fx:id="table" layoutX="-16.0" layoutY="77.0"
-                                           prefHeight="373.0" prefWidth="182.0" tableMenuButtonVisible="true"
-                                           AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                           AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
-                                    <columns>
-                                        <TableColumn fx:id="colNote" prefWidth="75.0" text="Note Title"/>
-                                        <TableColumn fx:id="colDate" prefWidth="75.0" text="Date"/>
-                                        <TableColumn fx:id="colCompleted" prefWidth="75.0" text="Completed"/>
-                                    </columns>
-                                </TableView>
-                                <!--    Formatting     -->
-                            </children>
-                        </AnchorPane>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                            <children>
-                                <SplitPane dividerPositions="0.07758620689655173" orientation="VERTICAL"
-                                           prefHeight="372.8" prefWidth="396.8" AnchorPane.bottomAnchor="0.0"
-                                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                           AnchorPane.topAnchor="0.0">
-                                    <items>
-                                        <TextField fx:id="txtTitle" promptText="Title"/>
-                                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="395.0">
-                                            <children>
-                                                <TextArea fx:id="txtTask" layoutY="8.0" prefHeight="319.2"
-                                                          prefWidth="395.2" promptText="Task goes here" wrapText="true"
-                                                          AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
-                                                          AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
-                                            </children>
-                                        </AnchorPane>
-                                    </items>
-                                </SplitPane>
-                            </children>
-                        </AnchorPane>
-                    </items>
+    <!--    Formatting     -->
+    <SplitPane dividerPositions="0.9021516393442623" orientation="VERTICAL" prefHeight="375.0" prefWidth="668.0"
+               AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+               AnchorPane.topAnchor="0.0">
+        <SplitPane dividerPositions="0.32923340961098396" prefHeight="374.4" prefWidth="571.2">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0"
+                        SplitPane.resizableWithParent="false">
+                <!--    Table     -->
+                <TableView id="TaskTable" fx:id="table" layoutX="-16.0" layoutY="77.0" prefHeight="373.0"
+                           prefWidth="182.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
+                    <contextMenu>
+                        <ContextMenu>
+                            <items>
+                                <MenuItem text="Remove Task" onAction="#removeTask"/>
+                                <MenuItem text="Mark Completed" onAction="#markCompleted"/>
+                            </items>
+                        </ContextMenu>
+                    </contextMenu>
+                    <columns>
+                        <TableColumn fx:id="colNote" prefWidth="75.0" text="Note Title"/>
+                        <TableColumn fx:id="colDate" prefWidth="75.0" text="Date"/>
+                        <TableColumn fx:id="colCompleted" prefWidth="75.0" text="Completed"/>
+                    </columns>
+                </TableView>
+                <!--    Formatting     -->
+            </AnchorPane>
+            <AnchorPane minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                <SplitPane dividerPositions="0.07758620689655173" orientation="VERTICAL" prefHeight="372.8"
+                           prefWidth="396.8" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <TextField fx:id="txtTitle" promptText="Title"/>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="210.0" prefWidth="395.0">
+                        <TextArea fx:id="txtTask" layoutY="8.0" prefHeight="319.2" prefWidth="395.2"
+                                  promptText="Task goes here" wrapText="true" AnchorPane.bottomAnchor="0.0"
+                                  AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0"/>
+                    </AnchorPane>
                 </SplitPane>
-                <HBox alignment="BOTTOM_CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity"
-                      spacing="10.0" SplitPane.resizableWithParent="false">
-                    <!--    User Controllers     -->
-                    <children>
-                        <Button fx:id="newTaskButton" mnemonicParsing="false" onAction="#newTask" text="New Task"/>
-                        <Label fx:id="lblDueDate" text="Due Date:"/>
-                        <DatePicker fx:id="datePicker" showWeekNumbers="true"/>
-                        <Spinner fx:id="spinHour" editable="true" prefHeight="26.0" prefWidth="54.0"/>
-                        <Spinner fx:id="spinMin" editable="true" prefHeight="26.0" prefWidth="54.0"/>
-                        <CheckBox fx:id="chkCompleted" mnemonicParsing="false" text="Completed"/>
-                        <Button fx:id="btnSubmit" mnemonicParsing="false" onAction="#addTask" text="Submit"/>
-                        <!--    Formatting     -->
-                    </children>
-                    <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
-                    </padding>
-                </HBox>
-            </items>
+            </AnchorPane>
         </SplitPane>
-    </children>
-
+        <HBox alignment="BOTTOM_CENTER" fillHeight="false" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="35.0"
+              prefWidth="688.0" spacing="10.0" SplitPane.resizableWithParent="false">
+            <!--    User Controllers     -->
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+            </padding>
+            <Button mnemonicParsing="false" onAction="#clearPrompts" text="New Task"/>
+            <Label text="Date:"/>
+            <DatePicker fx:id="datePicker" maxWidth="150.0" onAction="#displayTime" HBox.hgrow="NEVER"/>
+            <ChoiceBox fx:id="boxHR" prefWidth="60.0"/>
+            <ChoiceBox fx:id="boxMin" prefWidth="60.0"/>
+            <ChoiceBox fx:id="boxAMPM" prefWidth="75.0"/>
+            <CheckBox fx:id="chkCompleted" mnemonicParsing="false" text="Completed"/>
+            <Button mnemonicParsing="false" onAction="#submitTask" text="Submit"/>
+            <!--    Formatting     -->
+        </HBox>
+    </SplitPane>
 </AnchorPane>
