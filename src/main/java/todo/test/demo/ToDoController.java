@@ -60,24 +60,6 @@ public class ToDoController {
 		// TODO: add load logic
 	}
 
-	// TODO: to add more tab colors, add style to switch statement and selection option to ToDo-Test.fxml
-	public void changeTabColor(ActionEvent event) {
-		MenuItem callingItem = (MenuItem) event.getSource();
-		Tab tab = tabPane.getSelectionModel().getSelectedItem();
-
-		switch (callingItem.getId()) {
-			case "DarkTheme" -> tab.setStyle("-fx-background-color: darkgray; ");
-			case "LightTheme" -> tab.setStyle("-fx-background-color: ivory; ");
-			case "RedTheme" -> tab.setStyle("-fx-background-color: crimson; ");
-			case "OrangeTheme" -> tab.setStyle("-fx-background-color: darkorange; ");
-			case "YellowTheme" -> tab.setStyle("-fx-background-color: gold; ");
-			case "GreenTheme" -> tab.setStyle("-fx-background-color: green; ");
-			case "BlueTheme" -> tab.setStyle("-fx-background-color: lightskyblue; ");
-			case "PurpleTheme" -> tab.setStyle("-fx-background-color: mediumpurple; ");
-			case "PinkTheme" -> tab.setStyle("-fx-background-color: magenta; ");
-		}
-	}
-
 	public void saveState() {
 		// TODO: Implement save data
 		for (Tab tab : tabPane.getTabs()) {
