@@ -101,9 +101,14 @@ public class ToDoController {
 
 		String style = null;
 		switch (callingItem.getId()) {
-			case "theme1" -> style = "PurpleTheme.css";
-			case "theme2" -> style = "GreenTheme.css";
-			case "Dark Theme" -> style = "DarkTheme.css";
+			case "DarkTheme" -> style = "DarkTheme.css";
+			case "RedTheme" -> style = "RedTheme.css";
+			case "OrangeTheme" -> style = "OrangeTheme.css";
+			case "YellowTheme" -> style = "YellowTheme.css";
+			case "GreenTheme" -> style = "GreenTheme.css";
+			case "BlueTheme" -> style = "BlueTheme.css";
+			case "PurpleTheme" -> style = "PurpleTheme.css";
+			case "PinkTheme" -> style = "PinkTheme.css";
 		}
 		ap.getStylesheets().add(getClass().getResource(style).toExternalForm());
 	}
