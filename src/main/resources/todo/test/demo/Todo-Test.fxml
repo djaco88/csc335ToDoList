@@ -29,13 +29,6 @@
                     <MenuItem fx:id="PurpleTheme" mnemonicParsing="false" onAction="#changeTheme" text="Purple Theme"/>
                     <MenuItem fx:id="PinkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Pink Theme"/>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Change Tab Color">
-                    <!--Tab Colors-->
-                    <MenuItem fx:id="tabPurple" mnemonicParsing="false" onAction="#changeTabColor"
-                              text="Purple"/>
-                    <MenuItem fx:id="tabSilver" mnemonicParsing="false" onAction="#changeTabColor"
-                              text="Silver"/>
-                </Menu>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
                 <MenuItem mnemonicParsing="false" text="About"/>
