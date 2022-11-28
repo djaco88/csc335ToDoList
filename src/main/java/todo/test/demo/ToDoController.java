@@ -26,10 +26,8 @@ public class ToDoController {
 		// This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
 		//TODO: to update style for whole window update CSS Sheet for borderPane
-		//borderPane.getStylesheets().clear();
-		
-		//borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
-
+		borderPane.getStylesheets().clear();
+		borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
 		addTab();
 	}
 
