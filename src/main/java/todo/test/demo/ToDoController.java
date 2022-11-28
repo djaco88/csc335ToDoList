@@ -26,8 +26,9 @@ public class ToDoController {
 		// This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
 		//TODO: to update style for whole window update CSS Sheet for borderPane
-//		borderPane.getStylesheets().clear();
-//		borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
+		//borderPane.getStylesheets().clear();
+		
+		//borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
 
 		addTab();
 	}
@@ -102,8 +103,9 @@ public class ToDoController {
 
 		String style = null;
 		switch (callingItem.getId()) {
-			case "theme1" -> style = "testCSS.css";
-			case "theme2" -> style = "testCSS2.css";
+			case "theme1" -> style = "DarkTheme.css";
+			case "theme2" -> style = "GreenTheme.css";
+			case "Dark Theme" -> style = "DarkTheme.css";
 		}
 		ap.getStylesheets().add(getClass().getResource(style).toExternalForm());
 	}

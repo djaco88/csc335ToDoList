@@ -1,31 +1,27 @@
 .text-area {
     -fx-font-family: Consolas;
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
     -fx-display-caret:true;
 }
 
 .text-area .content {
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
     -fx-cursor: DEFAULT ;
 }
 
 .text-field{
     -fx-font-family: Consolas;
+    -fx-text-fill: black;
     -fx-display-caret:true;
-    -fx-text-inner-color: black;
+    -fx-text-inner-color: yellow;
 }
 
 .text-field .content {
-    -fx-text-inner-color: black;
+    -fx-text-inner-color: yellow;
+    -fx-text-fill: black;
     -fx-cursor: DEFAULT ;
-}
-
-.TaskTable{
--fx-text-inner-color: black;
--fx-background-color: black;
--fx-text-fill: white;
 }
 
 .table-view {
@@ -36,17 +32,17 @@
 }
 
 .table-view .column-header-background{
-    -fx-background-color: linear-gradient(to bottom, gray,lightgray);
+    -fx-background-color: linear-gradient(to bottom, gold, khaki);
     -fx-background-radius: 7px 7px 0px 0px;
     -fx-background-insets: 0 11px 0 0;
     -fx-padding: 0 0 5px 0;
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb{
-    -fx-background-color:  linear-gradient(to bottom, gray, lightgray);
+    -fx-background-color:  linear-gradient(to bottom, gold, khaki);
 }
 .table-view .virtual-flow .scroll-bar:horizontal .thumb {
-    -fx-background-color:  linear-gradient(to right, gray, lightgray);
+    -fx-background-color:  linear-gradient(to right, gold, khaki);
 }
 .table-view .virtual-flow .scroll-bar .increment-button,
 .table-view .virtual-flow .scroll-bar .decrement-button {
@@ -76,6 +72,6 @@
 }
 
 .button {
-    -fx-background-color: black;
-    -fx-text-fill: white;
+    -fx-background-color: yellow;
+    -fx-text-fill: black;
 }
