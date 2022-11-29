@@ -1,12 +1,14 @@
 package todo.test.demo;
 
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -114,6 +116,16 @@ public class ToDoController {
 		input.setHeaderText("Enter New Tab Name:");
 		input.showAndWait();
 		if (input.getResult() != null) tab.setText(input.getEditor().getText());
+	}
+
+	public void redirectToREADME(ActionEvent actionEvent) {
+		Application application = new Application() {
+			@Override
+			public void start(Stage primaryStage) throws Exception {
+
+			}
+		};
+		application.getHostServices().showDocument("https://github.com/djaco88/csc335ToDoList#readme");
 	}
 }
 
