@@ -31,7 +31,7 @@
                 </Menu>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">
-                <MenuItem mnemonicParsing="false" text="About"/>
+                <MenuItem mnemonicParsing="false" onAction="#redirectToREADME" text="About"/>
             </Menu>
         </MenuBar>
     </top>
