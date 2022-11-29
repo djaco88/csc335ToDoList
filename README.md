@@ -1,2 +1,2 @@
 # csc335ToDoList
-Authors: Jacob Davis
+Authors: Jacob Davis, Joseph Pettit, Johnny Poblano, Quinn James
