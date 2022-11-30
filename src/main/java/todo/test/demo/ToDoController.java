@@ -23,7 +23,6 @@ public class ToDoController {
 	@FXML
 	private TabPane tabPane;
 
-
 	@FXML
 	void initialize() throws ClassNotFoundException {
 		borderPane.getStylesheets().clear();

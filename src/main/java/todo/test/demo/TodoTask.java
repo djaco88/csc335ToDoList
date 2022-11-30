@@ -6,7 +6,6 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public class TodoTask {
 
@@ -14,8 +13,11 @@ public class TodoTask {
 	private final StringProperty description;
 	private final BooleanProperty completed;
 	private final StringProperty dueDisplay;
-	private LocalTime time;
+	//	private LocalTime time;
 	private LocalDate date;
+	private String hourValue;
+	private String minValue;
+	private String timeOfDay;
 
 
 	// Constructor without time. Date can be null
@@ -26,7 +28,9 @@ public class TodoTask {
 		if (date != null) this.dueDisplay = new SimpleStringProperty(date.toString());
 		else this.dueDisplay = new SimpleStringProperty();
 		this.date = date;
-		this.time = null;
+		this.hourValue = null;
+		this.minValue = null;
+		this.timeOfDay = null;
 	}
 
 	// Constructor with time.
@@ -37,17 +41,38 @@ public class TodoTask {
 		this.completed = new SimpleBooleanProperty(completed);
 		this.dueDisplay = new SimpleStringProperty(date.toString());
 		this.date = date;
-		if (timeOfDay.contains("P")) time = LocalTime.of(Integer.parseInt(hourValue) + 12, Integer.parseInt(minValue));
-		else time = LocalTime.of(Integer.parseInt(hourValue), Integer.parseInt(minValue));
+		this.hourValue = hourValue;
+		this.minValue = minValue;
+		this.timeOfDay = timeOfDay;
 
 	}
 
-	public LocalTime getTime() {
-		return time;
+	public LocalDate date() {
+		return date;
 	}
 
-	public void setTime(LocalTime time) {
-		this.time = time;
+	public String getHourValue() {
+		return hourValue;
+	}
+
+	public void setHourValue(String hourValue) {
+		this.hourValue = hourValue;
+	}
+
+	public String getMinValue() {
+		return minValue;
+	}
+
+	public void setMinValue(String minValue) {
+		this.minValue = minValue;
+	}
+
+	public String getTimeOfDay() {
+		return timeOfDay;
+	}
+
+	public void setTimeOfDay(String timeOfDay) {
+		this.timeOfDay = timeOfDay;
 	}
 
 	public LocalDate getDate() {
@@ -95,9 +120,4 @@ public class TodoTask {
 		return dueDisplay;
 	}
 
-	@Override
-	public String toString() {
-		return "TodoTask{" + "title=" + title + ", description=" + description + ", completed=" + completed + ", " +
-				"dueDisplay=" + dueDisplay + ", time=" + time + ", date=" + date + "}";
-	}
 }

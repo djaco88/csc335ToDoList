@@ -75,3 +75,19 @@
     -fx-background-color: mediumpurple;
     -fx-text-fill: black;
 }
+
+.table-row-cell:selected{
+-fx-background-color: mediumpurple;
+}
+
+.choice-box .menu-item:focused{
+-fx-background-color: mediumpurple;
+}
+
+.check-box .box {
+-fx-background-color: white;
+}
+
+.check-box:selected .box {
+-fx-background-color: mediumpurple;
+}
