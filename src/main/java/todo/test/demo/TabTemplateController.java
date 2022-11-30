@@ -165,8 +165,8 @@ public class TabTemplateController {
 	}
 
 	public void loadTasks(ArrayList<TaskData> taskDataList) {
-		for(TaskData t : taskDataList) {
-			taskList.add(new TodoTask(t.getTitle(), t.getDescription(), t.isCompleted(), t.getDate()));
+		for (TaskData t : taskDataList) {
+			taskList.add(new TodoTask(t.title(), t.description(), t.completed(), t.date()));
 		}
 	}
 
@@ -191,8 +191,8 @@ public class TabTemplateController {
 
 	public ArrayList<TaskData> saveData() {
 		ArrayList<TaskData> taskDataList = new ArrayList<>();
-		for(TodoTask t : taskList) {
-			taskDataList.add(new TaskData(t.getTitle(), t.getDescription(), t.isCompleted(), t.getTime(), t.getDate()));
+		for (TodoTask t : taskList) {
+			taskDataList.add(new TaskData(t.getTitle(), t.getDescription(), t.isCompleted(), t.getDate()));
 		}
 		return taskDataList;
 	}
