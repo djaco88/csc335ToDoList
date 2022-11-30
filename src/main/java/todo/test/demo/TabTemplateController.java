@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 public class TabTemplateController {
 
@@ -163,6 +164,12 @@ public class TabTemplateController {
 		tempTask.setDate(datePicker.getValue());
 	}
 
+	public void loadTasks(ArrayList<TaskData> taskDataList) {
+		for(TaskData t : taskDataList) {
+			taskList.add(new TodoTask(t.getTitle(), t.getDescription(), t.isCompleted(), t.getDate()));
+		}
+	}
+
 	@FXML
 	private void displayTime(ActionEvent event) {
 		DatePicker date = (DatePicker) event.getSource();
@@ -182,8 +189,11 @@ public class TabTemplateController {
 		chkCompleted.setSelected(false);
 	}
 
-	public void saveData() {
-		//TODO implement save data
-		System.out.println(taskList);
+	public ArrayList<TaskData> saveData() {
+		ArrayList<TaskData> taskDataList = new ArrayList<>();
+		for(TodoTask t : taskList) {
+			taskDataList.add(new TaskData(t.getTitle(), t.getDescription(), t.isCompleted(), t.getTime(), t.getDate()));
+		}
+		return taskDataList;
 	}
 }

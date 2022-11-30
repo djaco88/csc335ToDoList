@@ -10,6 +10,7 @@
 
             <Menu mnemonicParsing="false" text="File">
                 <MenuItem mnemonicParsing="false" onAction="#saveState" text="Save"/>
+                <MenuItem mnemonicParsing="false" onAction="#loadFromSave" text="Load"/>
                 <MenuItem mnemonicParsing="false" onAction="#closeWindow" text="Close"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Tabs">
