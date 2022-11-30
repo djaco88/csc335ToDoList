@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--suppress JavaFxUnresolvedFxIdReference, JavaFxUnresolvedFxIdReference -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" maxHeight="-Infinity" maxWidth="720.0" prefHeight="375.0"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" maxHeight="-Infinity" maxWidth="720.0"
+            prefHeight="375.0"
             prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             fx:controller="todo.test.demo.ToDoController">
     <top>

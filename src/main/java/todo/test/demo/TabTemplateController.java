@@ -184,7 +184,10 @@ public class TabTemplateController {
 
 	@FXML
 	private void markCompleted() {
-		table.getSelectionModel().getSelectedItem().setCompleted(true);
+		if (table.getSelectionModel().getSelectedItem().isCompleted())
+			table.getSelectionModel().getSelectedItem().setCompleted(false);
+		else table.getSelectionModel().getSelectedItem().setCompleted(true);
+
 		table.getSelectionModel().clearSelection();
 		chkCompleted.setSelected(false);
 	}
