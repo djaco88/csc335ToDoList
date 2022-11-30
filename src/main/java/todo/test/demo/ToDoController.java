@@ -10,7 +10,13 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 
 public class ToDoController {
@@ -59,8 +65,26 @@ public class ToDoController {
 		}
 	}
 
-	private void loadFromSave() {
-		// TODO: add load logic
+	@FXML
+	private void loadFromSave() throws IOException, ClassNotFoundException {
+		FileInputStream fi = new FileInputStream(new File("saveData.todo"));
+		ObjectInputStream oi = new ObjectInputStream(fi);
+
+		SaveData saveData = (SaveData)oi.readObject();
+
+		for(TabData t : saveData.getTabs()) {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setController(new TabTemplateController());
+			Tab newTab = new Tab();
+			newTab.setContent(FXMLLoader.load(getClass().getResource("TabTemplate.fxml")));
+			newTab.setText(t.getName());
+			TabTemplateController temp = (TabTemplateController) newTab.getContent().getUserData();
+			temp.loadTasks(t.getTasks());
+			newTab.setOnClosed(e -> updateClosable());
+			tabPane.getTabs().add(tabPane.getTabs().size(), newTab);
+		}
+		tabPane.getSelectionModel().selectLast();
+		updateClosable();
 	}
 
 	// TODO: to add more tab colors, add style to switch statement and selection option to ToDo-Test.fxml
@@ -74,16 +98,23 @@ public class ToDoController {
 		}
 	}
 
-	public void saveState() {
-		// TODO: Implement save data
+	public void saveState() throws IOException {
+		SaveData saveData = new SaveData();
+		FileOutputStream f = new FileOutputStream(new File("saveData.todo"));
+		ObjectOutputStream o = new ObjectOutputStream(f);
+		
 		for (Tab tab : tabPane.getTabs()) {
 			TabTemplateController temp = (TabTemplateController) tab.getContent().getUserData();
-			temp.saveData();
+			saveData.addTab(new TabData(tab.getId(), temp.saveData()));
 		}
+
+		o.writeObject(saveData);
+		o.close();
+		f.close();
 	}
 
-	public void closeWindow() {
-		// TODO: add exit saving state logic
+	public void closeWindow() throws IOException {
+		saveState();
 		System.exit(0);
 	}
 
