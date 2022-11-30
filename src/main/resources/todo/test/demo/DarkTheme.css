@@ -1,0 +1,81 @@
+.text-area {
+    -fx-font-family: Consolas;
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-display-caret:true;
+}
+
+.text-area .content {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-cursor: DEFAULT ;
+}
+
+.text-field{
+    -fx-font-family: Consolas;
+    -fx-display-caret:true;
+    -fx-text-inner-color: black;
+}
+
+.text-field .content {
+    -fx-text-inner-color: black;
+    -fx-cursor: DEFAULT ;
+}
+
+.TaskTable{
+-fx-text-inner-color: black;
+-fx-background-color: black;
+-fx-text-fill: white;
+}
+
+.table-view {
+    -fx-background-color: transparent;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(to bottom, gray,lightgray);
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-background-insets: 0 11px 0 0;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb{
+    -fx-background-color:  linear-gradient(to bottom, gray, lightgray);
+}
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color:  linear-gradient(to right, gray, lightgray);
+}
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .corner {
+    -fx-background-color: transparent;
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+}

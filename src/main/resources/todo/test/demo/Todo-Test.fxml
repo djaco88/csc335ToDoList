@@ -20,15 +20,15 @@
             <Menu mnemonicParsing="false" text="Colors">
                 <Menu fx:id="menuChangeTheme" mnemonicParsing="false" text="Change Tab Theme">
                     <!--Tab Themes -->
-                    <MenuItem fx:id="theme1" mnemonicParsing="false" onAction="#changeTheme" text="Theme 1"/>
-                    <MenuItem fx:id="theme2" mnemonicParsing="false" onAction="#changeTheme" text="Theme 2"/>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Change Tab Color">
-                    <!--Tab Colors-->
-                    <MenuItem fx:id="tabPurple" mnemonicParsing="false" onAction="#changeTabColor"
-                              text="Purple"/>
-                    <MenuItem fx:id="tabSilver" mnemonicParsing="false" onAction="#changeTabColor"
-                              text="Silver"/>
+                    <MenuItem fx:id="DarkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Dark Theme"/>
+                    <MenuItem fx:id="LightTheme" mnemonicParsing="false" onAction="#changeTheme" text="Light Theme"/>
+                    <MenuItem fx:id="RedTheme" mnemonicParsing="false" onAction="#changeTheme" text="Red Theme"/>
+                    <MenuItem fx:id="OrangeTheme" mnemonicParsing="false" onAction="#changeTheme" text="Orange Theme"/>
+                    <MenuItem fx:id="YellowTheme" mnemonicParsing="false" onAction="#changeTheme" text="Yellow Theme"/>
+                    <MenuItem fx:id="GreenTheme" mnemonicParsing="false" onAction="#changeTheme" text="Green Theme"/>
+                    <MenuItem fx:id="BlueTheme" mnemonicParsing="false" onAction="#changeTheme" text="Blue Theme"/>
+                    <MenuItem fx:id="PurpleTheme" mnemonicParsing="false" onAction="#changeTheme" text="Purple Theme"/>
+                    <MenuItem fx:id="PinkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Pink Theme"/>
                 </Menu>
             </Menu>
             <Menu mnemonicParsing="false" text="Help">

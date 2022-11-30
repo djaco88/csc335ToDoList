@@ -34,9 +34,8 @@ public class ToDoController {
 		// This method is called by the FXMLLoader when initialization is complete
 	void initialize() {
 		//TODO: to update style for whole window update CSS Sheet for borderPane
-//		borderPane.getStylesheets().clear();
-//		borderPane.getStylesheets().add(getClass().getResource("testCSS2.css").toExternalForm());
-
+		borderPane.getStylesheets().clear();
+		borderPane.getStylesheets().add(getClass().getResource("LightTheme.css").toExternalForm());
 		addTab();
 	}
 
@@ -135,8 +134,42 @@ public class ToDoController {
 
 		String style = null;
 		switch (callingItem.getId()) {
-			case "theme1" -> style = "testCSS.css";
-			case "theme2" -> style = "testCSS2.css";
+			case "DarkTheme" -> {
+				style = "DarkTheme.css";
+				tab.setStyle("-fx-background-color: darkgray; ");
+			}
+			case "LightTheme" -> {
+				style = "LightTheme.css";
+				tab.setStyle("-fx-background-color: white; ");
+			}
+			case "RedTheme" -> {
+				style = "RedTheme.css";
+				tab.setStyle("-fx-background-color: red; ");
+			}
+			case "OrangeTheme" -> {
+				style = "OrangeTheme.css";
+				tab.setStyle("-fx-background-color: orange; ");
+			}
+			case "YellowTheme" -> {
+				style = "YellowTheme.css";
+				tab.setStyle("-fx-background-color: gold; ");
+			}
+			case "GreenTheme" -> {
+				style = "GreenTheme.css";
+				tab.setStyle("-fx-background-color: green; ");
+			}
+			case "BlueTheme" -> {
+				style = "BlueTheme.css";
+				tab.setStyle("-fx-background-color: lightskyblue; ");
+			}
+			case "PurpleTheme" -> {
+				style = "PurpleTheme.css";
+				tab.setStyle("-fx-background-color: mediumpurple; ");
+			}
+			case "PinkTheme" -> {
+				style = "PinkTheme.css";
+				tab.setStyle("-fx-background-color: pink; ");
+			}
 		}
 		ap.getStylesheets().add(getClass().getResource(style).toExternalForm());
 	}
