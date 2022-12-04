@@ -13,7 +13,6 @@ public class TodoTask {
 	private final StringProperty description;
 	private final BooleanProperty completed;
 	private final StringProperty dueDisplay;
-	//	private LocalTime time;
 	private LocalDate date;
 	private String hourValue;
 	private String minValue;
