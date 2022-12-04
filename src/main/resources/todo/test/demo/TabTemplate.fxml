@@ -11,7 +11,6 @@
         <fx:reference source="controller"/>
     </userData>
 
-
     <!--    Formatting     -->
     <SplitPane dividerPositions="0.9021516393442623" orientation="VERTICAL" prefHeight="375.0" prefWidth="668.0"
                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -64,7 +63,7 @@
             <ChoiceBox fx:id="boxHR" prefWidth="60.0"/>
             <ChoiceBox fx:id="boxMin" prefWidth="60.0"/>
             <ChoiceBox fx:id="boxAMPM" prefWidth="75.0"/>
-            <CheckBox fx:id="chkCompleted" mnemonicParsing="false" text="Completed"/>
+            <CheckBox fx:id="chkCompleted" mnemonicParsing="false" onAction="#markCompleted" text="Completed"/>
             <Button mnemonicParsing="false" onAction="#submitTask" text="Submit"/>
             <!--    Formatting     -->
         </HBox>

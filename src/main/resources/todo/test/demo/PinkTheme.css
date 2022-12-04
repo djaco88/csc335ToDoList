@@ -75,3 +75,19 @@
     -fx-background-color: magenta;
     -fx-text-fill: black;
 }
+
+.table-row-cell:selected{
+-fx-background-color: magenta;
+}
+
+.choice-box .menu-item:focused{
+-fx-background-color: magenta;
+}
+
+.check-box .box {
+-fx-background-color: white;
+}
+
+.check-box:selected .box {
+-fx-background-color: magenta;
+}

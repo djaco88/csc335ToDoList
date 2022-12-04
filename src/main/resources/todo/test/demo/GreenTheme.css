@@ -75,3 +75,19 @@
     -fx-background-color: green;
     -fx-text-fill: black;
 }
+
+.table-row-cell:selected{
+-fx-background-color: green;
+}
+
+.choice-box .menu-item:focused{
+-fx-background-color: green;
+}
+
+.check-box .box {
+-fx-background-color: white;
+}
+
+.check-box:selected .box {
+-fx-background-color: green;
+}

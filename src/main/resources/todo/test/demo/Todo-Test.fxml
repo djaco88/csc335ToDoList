@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--suppress JavaFxUnresolvedFxIdReference, JavaFxUnresolvedFxIdReference -->
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.BorderPane?>
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="720.0" prefHeight="375.0" prefWidth="700.0"
-            xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1"
+<BorderPane xmlns:fx="http://javafx.com/fxml/1" fx:id="borderPane" maxHeight="-Infinity" maxWidth="720.0"
+            prefHeight="375.0"
+            prefWidth="700.0" xmlns="http://javafx.com/javafx/17.0.2-ea"
             fx:controller="todo.test.demo.ToDoController">
     <top>
         <MenuBar BorderPane.alignment="CENTER">
@@ -18,7 +20,7 @@
                 <MenuItem mnemonicParsing="false" onAction="#renameTab" text="Rename Tab"/>
             </Menu>
             <Menu mnemonicParsing="false" text="Colors">
-                <Menu fx:id="menuChangeTheme" mnemonicParsing="false" text="Change Tab Theme">
+                <Menu mnemonicParsing="false" text="Change Tab Theme">
                     <!--Tab Themes -->
                     <MenuItem fx:id="DarkTheme" mnemonicParsing="false" onAction="#changeTheme" text="Dark Theme"/>
                     <MenuItem fx:id="LightTheme" mnemonicParsing="false" onAction="#changeTheme" text="Light Theme"/>
