@@ -8,10 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class TabTemplateController {
 
@@ -89,16 +86,10 @@ public class TabTemplateController {
 		txtTitle.setText(tempTask.getTitle());
 		txtTask.setText(tempTask.getDescription());
 		datePicker.setValue(tempTask.getDate());
-
-		if (tempTask.getTime() != null) {
-			if (tempTask.getTime().getHour() > 12) {
-				boxHR.setValue(String.valueOf(tempTask.getTime().getHour() - 12));
-				boxAMPM.setValue(boxAMPM.getItems().get(2));
-			} else {
-				boxHR.setValue(String.valueOf(tempTask.getTime().getHour()));
-				boxAMPM.setValue(boxAMPM.getItems().get(1));
-			}
-			boxMin.setValue(String.valueOf(tempTask.getTime().getMinute()));
+		if (tempTask.getHourValue() != null) {
+			boxHR.setValue(tempTask.getHourValue());
+			boxMin.setValue(tempTask.getMinValue());
+			boxAMPM.setValue(tempTask.getTimeOfDay());
 		}
 		chkCompleted.setSelected(tempTask.isCompleted());
 	}
@@ -133,92 +124,69 @@ public class TabTemplateController {
 	}
 
 	private void newTask() {
-		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
+		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
 			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-					datePicker.getValue()));
-		}
-		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"
-		))) {
-			dialogBoxOps();
-		}
-		taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-				datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
+			                          datePicker.getValue()));
+		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
+			// TODO: Throw error
+			System.out.println("TIME ERROR");
+		} else
+			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
+			                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
 	}
-  private void dialogBoxOps(){
-  String[] hr = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-  String[] min = {"00","05","10","15","20","25","30","35","40","45","50","55"};
-  String[] amPM = {"AM","PM"};
-  ChoiceDialog hours = new ChoiceDialog<>(hr[0],hr);
-  ChoiceDialog minutes = new ChoiceDialog<>(min[0],min);
-  ChoiceDialog pmAM = new ChoiceDialog<>(amPM[0],amPM);
-  if (boxHR.getValue().equals("HH")) {
-    hours.setHeaderText("Must enter number for HH:");
-    hours.showAndWait();
-    boxHR.setValue((String) hours.getSelectedItem());
-  }
-  if (boxMin.getValue().equals("MM")) {
-    minutes.setHeaderText("Must enter number for MM:");
-    minutes.showAndWait();
-    boxMin.setValue((String) minutes.getSelectedItem());
-  }
-  if (boxAMPM.getValue().equals("AM/PM")) {
-    pmAM.setHeaderText("Must enter number for AM/PM:");
-    pmAM.showAndWait();
-    boxAMPM.setValue((String) pmAM.getSelectedItem());
-  }
-}
-private void updateTask() {
-  if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
-    tempTask.setTime(null);
-  } else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
-    dialogBoxOps();
-    // System.out.println("TIME ERROR");
-  }
-  LocalTime time;
-  if (boxAMPM.getValue().contains("P")) {
-    time = LocalTime.of(Integer.parseInt(boxHR.getValue()) + 12, Integer.parseInt(boxMin.getValue()));
-  } else {
-    time = LocalTime.of(Integer.parseInt(boxHR.getValue()), Integer.parseInt(boxMin.getValue()));
-  }
 
-  tempTask.setTime(time);
+	private void updateTask() {
+		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
+			tempTask.setHourValue(null);
+			tempTask.setMinValue(null);
+			tempTask.setTimeOfDay(null);
+		} else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
+			// TODO: Throw error
+			System.out.println("TIME ERROR");
+		} else {
+			tempTask.setHourValue(boxHR.getValue());
+			tempTask.setMinValue(boxMin.getValue());
+			tempTask.setTimeOfDay(boxAMPM.getValue());
+		}
 
-  tempTask.setTitle(txtTitle.getText());
-  tempTask.setDescription(txtTask.getText());
-  tempTask.setCompleted(chkCompleted.isSelected());
-  tempTask.setDate(datePicker.getValue());
-}
+		tempTask.setTitle(txtTitle.getText());
+		tempTask.setDescription(txtTask.getText());
+		tempTask.setCompleted(chkCompleted.isSelected());
+		tempTask.setDate(datePicker.getValue());
+	}
 
-public void loadTasks(ArrayList<TaskData> taskDataList) {
-  for(TaskData t : taskDataList) {
-    taskList.add(new TodoTask(t.getTitle(), t.getDescription(), t.isCompleted(), t.getDate()));
-  }
-}
+	public void loadTasks(ArrayList<TaskData> taskDataList) {
+		for (TaskData t : taskDataList) {
+			taskList.add(new TodoTask(t.title(), t.description(), t.completed(), t.date(), t.hourValue(), t.minValue()
+					, t.timeOfDay()));
+		}
+	}
 
-@FXML
-private void displayTime(ActionEvent event) {
-  DatePicker date = (DatePicker) event.getSource();
-  setTimeVisible(date.getValue() != null);
-}
+	@FXML
+	private void displayTime(ActionEvent event) {
+		DatePicker date = (DatePicker) event.getSource();
+		setTimeVisible(date.getValue() != null);
+	}
 
-@FXML
-private void removeTask() {
-  TodoTask task = table.getSelectionModel().getSelectedItem();
-  table.getItems().remove(task);
-}
+	@FXML
+	private void removeTask() {
+		TodoTask task = table.getSelectionModel().getSelectedItem();
+		table.getItems().remove(task);
+	}
 
-@FXML
-private void markCompleted() {
-  table.getSelectionModel().getSelectedItem().setCompleted(true);
-  table.getSelectionModel().clearSelection();
-  chkCompleted.setSelected(false);
-}
+	@FXML
+	private void markCompleted() {
+		if (table.getSelectionModel().getSelectedItem() != null)
+			table.getSelectionModel().getSelectedItem().setCompleted(!table.getSelectionModel().getSelectedItem().isCompleted());
+		taskSelected();
+	}
 
-public ArrayList<TaskData> saveData() {
-  ArrayList<TaskData> taskDataList = new ArrayList<>();
-  for(TodoTask t : taskList) {
-    taskDataList.add(new TaskData(t.getTitle(), t.getDescription(), t.isCompleted(), t.getTime(), t.getDate()));
-  }
-  return taskDataList;
-}
+	public ArrayList<TaskData> saveData() {
+		ArrayList<TaskData> taskDataList = new ArrayList<>();
+		for (TodoTask t : taskList) {
+			taskDataList.add(new TaskData(t.getTitle(), t.getDescription(), t.isCompleted(), t.getDate(),
+			                              t.getHourValue(), t.getMinValue(), t.getTimeOfDay()));
+		}
+		return taskDataList;
+	}
 }
