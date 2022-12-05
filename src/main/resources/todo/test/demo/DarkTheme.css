@@ -79,3 +79,19 @@
     -fx-background-color: black;
     -fx-text-fill: white;
 }
+
+.table-row-cell:selected{
+-fx-background-color: black;
+}
+
+.choice-box .menu-item:focused{
+-fx-background-color: black;
+}
+
+.check-box .box {
+-fx-background-color: white;
+}
+
+.check-box:selected .box {
+-fx-background-color: black;
+}

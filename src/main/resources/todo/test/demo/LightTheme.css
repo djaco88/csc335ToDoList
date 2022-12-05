@@ -172,7 +172,6 @@ modena.css
     /* Background for items in list like things such as menus, lists, trees,
      * and tables.
      *
-     * TODO: it seems like this should be based upon -fx-accent and we should
      * remove the setting -fx-background in all the sections that use
      * -fx-selection-bar.
      */
@@ -181,13 +180,11 @@ modena.css
     /* The color to use as -fx-text-fill when painting text on top of
      * backgrounds filled with -fx-selection-bar.
      *
-     * TODO: it seems like this should be derived from -fx-selection-bar.
      */
 
 
     /* The default border color for a tab.
      *
-     * TODO: should this be -fx-box-border or derived from some other color?
      */
 
     /* The color to use in ListView/TreeView/TableView to indicate hover. */
@@ -432,7 +429,7 @@ modena.css
         linear-gradient(to bottom, derive(-fx-color,-60%) 0%, derive(-fx-color,-35%) 50%, derive(-fx-color,-30%) 98%, derive(-fx-color,-50%) 100%),
         linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0) 10%, rgba(0,0,0,0) 90%, rgba(0,0,0,0.3) 100%);
     -fx-background-insets: 0 0 -1 0, 0, 1, 1;
-    /* TODO: -fx-text-fill should be derived */
+
     -fx-text-fill: -fx-light-text-color;
 }
 
@@ -551,8 +548,7 @@ modena.css
     -fx-padding: 0.333333em; /* 4 -- this is half the size of the mark */
     -fx-shape: "M0,4H2L3,6L6,0H8L4,8H2Z";
 }
-
-/* TODO: scale the shape - the problem is that it is not within a square
+/*
  * boundary.
  */
 .check-box:indeterminate > .box > .mark {
@@ -911,7 +907,7 @@ modena.css
     -fx-accelerator-gutter: 0;
 }*/
 
-/* TODO: need to use the ID here.  For some reason, the other form does not
+/*
  * work.  This might be related to popup issues.
  */
 /*.choice-box > * > .menu-item-radio {*/

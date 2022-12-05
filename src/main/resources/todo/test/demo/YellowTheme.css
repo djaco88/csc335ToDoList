@@ -60,6 +60,7 @@
 
 .table-view .table-cell{
     -fx-border-color: transparent;
+    -fx-text-fill: black;
     -fx-padding: 2 0 2 10px;
 }
 
@@ -74,4 +75,21 @@
 .button {
     -fx-background-color: yellow;
     -fx-text-fill: black;
+}
+
+.table-row-cell:selected{
+-fx-background-color: yellow;
+}
+
+.choice-box .menu-item:focused{
+-fx-text-fill: black;
+-fx-background-color: gold;
+}
+
+.check-box .box {
+-fx-background-color: white;
+}
+
+.check-box:selected .box {
+-fx-background-color: yellow;
 }
