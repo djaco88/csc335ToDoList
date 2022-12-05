@@ -10,6 +10,8 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TabTemplateController {
 
@@ -131,32 +133,55 @@ public class TabTemplateController {
 	}
 
 	private void newTask() {
-		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
+		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
 			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-			                          datePicker.getValue()));
+					datePicker.getValue()));
+		}
 		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"
-		)))
-			// TODO: Throw error
-			System.out.println("TIME ERROR");
-		else
-			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-			                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
+		))) {
+			dialogBoxOps();
+		}
+		taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
+				datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
 	}
-
+    private void dialogBoxOps(){
+		String[] hr = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		String[] min = {"00","05","10","15","20","25","30","35","40","45","50","55"};
+		String[] amPM = {"AM","PM"};
+		ChoiceDialog hours = new ChoiceDialog<>(hr[0],hr);
+		ChoiceDialog minutes = new ChoiceDialog<>(min[0],min);
+		ChoiceDialog pmAM = new ChoiceDialog<>(amPM[0],amPM);
+		if (boxHR.getValue().equals("HH")) {
+			hours.setHeaderText("Must enter number for HH:");
+			hours.showAndWait();
+			boxHR.setValue((String) hours.getSelectedItem());
+		}
+		if (boxMin.getValue().equals("MM")) {
+			minutes.setHeaderText("Must enter number for MM:");
+			minutes.showAndWait();
+			boxMin.setValue((String) minutes.getSelectedItem());
+		}
+		if (boxAMPM.getValue().equals("AM/PM")) {
+			pmAM.setHeaderText("Must enter number for AM/PM:");
+			pmAM.showAndWait();
+			boxAMPM.setValue((String) pmAM.getSelectedItem());
+		}
+	}
 	private void updateTask() {
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
 			tempTask.setTime(null);
 		} else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
-			// TODO: Throw error
-			System.out.println("TIME ERROR");
-		} else {
-			LocalTime time;
-			if (boxAMPM.getValue().contains("P"))
-				time = LocalTime.of(Integer.parseInt(boxHR.getValue()) + 12, Integer.parseInt(boxMin.getValue()));
-			else time = LocalTime.of(Integer.parseInt(boxHR.getValue()), Integer.parseInt(boxMin.getValue()));
-
-			tempTask.setTime(time);
+			dialogBoxOps();
+			// System.out.println("TIME ERROR");
 		}
+		LocalTime time;
+		if (boxAMPM.getValue().contains("P")) {
+			time = LocalTime.of(Integer.parseInt(boxHR.getValue()) + 12, Integer.parseInt(boxMin.getValue()));
+		} else {
+			time = LocalTime.of(Integer.parseInt(boxHR.getValue()), Integer.parseInt(boxMin.getValue()));
+		}
+
+		tempTask.setTime(time);
 
 		tempTask.setTitle(txtTitle.getText());
 		tempTask.setDescription(txtTask.getText());
