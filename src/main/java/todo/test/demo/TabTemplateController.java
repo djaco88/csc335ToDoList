@@ -163,9 +163,10 @@ public class TabTemplateController {
 			                          datePicker.getValue()));
 		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
 			dialogBoxOps();
+			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
+			                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
 		}
-		taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-		                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
+
 	}
 
 	/**
