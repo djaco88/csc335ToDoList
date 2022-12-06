@@ -15,7 +15,9 @@ import javafx.stage.Stage;
 
 import java.io.*;
 
-
+/**
+ * Controller class for Todo-Test.fxml
+ */
 public class ToDoController {
 
 	@FXML
@@ -35,6 +37,12 @@ public class ToDoController {
 		}
 	}
 
+	/**
+	 * Loads saved data file and updates display.
+	 *
+	 * @throws IOException            If file does not exist.
+	 * @throws ClassNotFoundException if file does not contain SaveData
+	 */
 	@FXML
 	private void loadFromSave() throws IOException, ClassNotFoundException {
 		FileInputStream fi = new FileInputStream("saveData.todo");
@@ -61,6 +69,9 @@ public class ToDoController {
 		updateClosable();
 	}
 
+	/**
+	 * Adds new tab to tab pane
+	 */
 	public void addTab() {
 		FXMLLoader loader = new FXMLLoader();
 		loader.setController(new TabTemplateController());
@@ -78,6 +89,9 @@ public class ToDoController {
 		}
 	}
 
+	/**
+	 * Restricts user from closing tab if only 1 tab open.
+	 */
 	private void updateClosable() {
 		if (tabPane.getTabs().size() < 2) {
 			tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
@@ -86,11 +100,21 @@ public class ToDoController {
 		}
 	}
 
+	/**
+	 * Saves the current state and closes application.
+	 *
+	 * @throws IOException
+	 */
 	public void closeWindow() throws IOException {
 		saveState();
 		System.exit(0);
 	}
 
+	/**
+	 * Writes application state to save file.
+	 *
+	 * @throws IOException
+	 */
 	public void saveState() throws IOException {
 		SaveData saveData = new SaveData();
 		FileOutputStream f = new FileOutputStream("saveData.todo");
@@ -106,6 +130,11 @@ public class ToDoController {
 		f.close();
 	}
 
+	/**
+	 * Updates tab theme from menu-bar action event.
+	 *
+	 * @param event calling MenuItem
+	 */
 	public void changeTheme(ActionEvent event) {
 		MenuItem callingItem = (MenuItem) event.getSource();
 		Tab tab = tabPane.getSelectionModel().getSelectedItem();
@@ -115,6 +144,13 @@ public class ToDoController {
 		changeTheme(callingItem.getId(), tab, ap);
 	}
 
+	/**
+	 * Updates tab theme, and saves new theme to tab's controller.
+	 *
+	 * @param theme Theme to be set
+	 * @param tab   Tab to be set
+	 * @param ap    AnchorPane of tab to be set
+	 */
 	private void changeTheme(String theme, Tab tab, AnchorPane ap) {
 		String style = null;
 		switch (theme) {
@@ -160,6 +196,9 @@ public class ToDoController {
 		tabController.setTheme(theme);
 	}
 
+	/**
+	 * Displays input dialog to change current tab name.
+	 */
 	public void renameTab() {
 		Tab tab = tabPane.getSelectionModel().getSelectedItem();
 		TextInputDialog input = new TextInputDialog("Tab Name");
@@ -168,6 +207,9 @@ public class ToDoController {
 		if (input.getResult() != null) tab.setText(input.getEditor().getText());
 	}
 
+	/**
+	 * Opens browser and directs to group gitHub page.
+	 */
 	public void redirectToREADME() {
 		new Application() {
 			@Override

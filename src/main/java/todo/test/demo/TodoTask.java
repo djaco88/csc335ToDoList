@@ -47,10 +47,6 @@ public class TodoTask {
 
 	}
 
-	public LocalDate date() {
-		return date;
-	}
-
 	public String getHourValue() {
 		return hourValue;
 	}
