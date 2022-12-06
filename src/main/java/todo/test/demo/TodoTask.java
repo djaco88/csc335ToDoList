@@ -38,8 +38,9 @@ public class TodoTask {
 		this.title = new SimpleStringProperty(title);
 		this.description = new SimpleStringProperty(description);
 		this.completed = new SimpleBooleanProperty(completed);
-		this.dueDisplay = new SimpleStringProperty(date.toString());
 		this.date = date;
+		if (date != null) this.dueDisplay = new SimpleStringProperty(date.toString());
+		else this.dueDisplay = new SimpleStringProperty();
 		this.hourValue = hourValue;
 		this.minValue = minValue;
 		this.timeOfDay = timeOfDay;
