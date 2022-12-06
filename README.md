@@ -13,11 +13,11 @@ a program with a user friendly GUI that keeps track of tasks. Tasks can be added
 
 GUI Details:
 
-Exit gui- either click the x on the top left of the GUI or click close under the File Tab
+Exit GUI- either click the x on the top left of the GUI or click Close in the File dropdown menu
 
-Save- click save under the File Tab
+Save- click save in the File dropdown menu
 
-Load- click load under the File Tab
+Load- click load in the File dropdown menu
 
 Create New Tab- click on the Tabs dropdown menu and click Add Tab
 
@@ -25,7 +25,7 @@ Change Name of Tab- select the Rename Tab option in the Tabs dropdown menu
 
 Change Color Theme- navigate to Change Tab Theme in the Colors dropdown menu (note: this theme is only applied to the current tab)
 
-Get Help- selecting the About option in the Help menu will redirect you to this README file on github
+Get Help- selecting the About option in the Help dropdown menu will redirect you to this README file on github
 
 Creating a Task- navigate to the desired tab you want to store the task in. Click New Task if you are currently viewing an existing task, and fill in the Task Title, a description (optional), select the date (optional), select the time (optional)
 
