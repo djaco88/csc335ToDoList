@@ -10,6 +10,9 @@ import javafx.scene.control.cell.CheckBoxTableCell;
 
 import java.util.ArrayList;
 
+/**
+ * Controller Class for TabTemplate.fxml
+ */
 public class TabTemplateController {
 
 	private TodoTask tempTask;
@@ -38,6 +41,9 @@ public class TabTemplateController {
 	private CheckBox chkCompleted;
 	private String theme;
 
+	/**
+	 * This method will automatically be called when tab is created.
+	 */
 	@FXML
 	void initialize() {
 		setupTable();
@@ -46,6 +52,9 @@ public class TabTemplateController {
 		theme = "LightTheme";
 	}
 
+	/**
+	 * Initialize task table.
+	 */
 	private void setupTable() {
 		colNote.setCellValueFactory(c -> c.getValue().titleProperty());
 		colDate.setCellValueFactory(c -> c.getValue().dueDisplayProperty());
@@ -58,6 +67,9 @@ public class TabTemplateController {
 		table.getSelectionModel().getSelectedItems().addListener((ListChangeListener<TodoTask>) c -> taskSelected());
 	}
 
+	/**
+	 * Initializes date and time selectors
+	 */
 	private void setupDateTime() {
 		datePicker.setMaxWidth(110);
 
@@ -81,6 +93,9 @@ public class TabTemplateController {
 		boxAMPM.setValue(boxAMPM.getItems().get(0));
 	}
 
+	/**
+	 * Updates task title, description, date, time, and completed checkbox when task is selected.
+	 */
 	private void taskSelected() {
 		clearPrompts();
 		tempTask = table.getSelectionModel().getSelectedItem();
@@ -96,12 +111,20 @@ public class TabTemplateController {
 		chkCompleted.setSelected(tempTask.isCompleted());
 	}
 
+	/**
+	 * Allows users to set task time.
+	 *
+	 * @param visible true if user is allowed to set time.
+	 */
 	private void setTimeVisible(boolean visible) {
 		boxMin.setVisible(visible);
 		boxHR.setVisible(visible);
 		boxAMPM.setVisible(visible);
 	}
 
+	/**
+	 * Clears display for new task entries.
+	 */
 	@FXML
 	private void clearPrompts() {
 		tempTask = null;
@@ -116,6 +139,10 @@ public class TabTemplateController {
 		chkCompleted.setSelected(false);
 	}
 
+	/**
+	 * Called when submit button is pushed.
+	 * Saves task data to table, or creates new task.
+	 */
 	@FXML
 	private void submitTask() {
 		if (tempTask == null) newTask();
@@ -125,32 +152,39 @@ public class TabTemplateController {
 		table.getSelectionModel().clearSelection();
 	}
 
+	/**
+	 * Stores user submitted information to task list as new task.
+	 * If user only inputs 1 of the 3 time selections, dialog box will appear.
+	 * (HH - MM - AM/PM) must all be set to continue.
+	 */
 	private void newTask() {
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
 			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
 			                          datePicker.getValue()));
 		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
-			// TODO: Throw error
 			dialogBoxOps();
+			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
+			                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
 		}
-		taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-		                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
+
 	}
 
+	/**
+	 * If task already exists in taskList, task is updated with user input.
+	 * If user only inputs 1 of the 3 time selections, dialog box will appear.
+	 * (HH - MM - AM/PM) must all be set to continue.
+	 */
 	private void updateTask() {
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
 			tempTask.setHourValue(null);
 			tempTask.setMinValue(null);
 			tempTask.setTimeOfDay(null);
 		} else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
-			// TODO: Throw error
 			dialogBoxOps();
-			//System.out.println("TIME ERROR");
 		}
 		tempTask.setHourValue(boxHR.getValue());
 		tempTask.setMinValue(boxMin.getValue());
 		tempTask.setTimeOfDay(boxAMPM.getValue());
-
 
 		tempTask.setTitle(txtTitle.getText());
 		tempTask.setDescription(txtTask.getText());
@@ -158,30 +192,38 @@ public class TabTemplateController {
 		tempTask.setDate(datePicker.getValue());
 	}
 
+	/**
+	 * Choice dialog displayed when user doesn't set all three time values.
+	 */
 	private void dialogBoxOps() {
 		String[] hr = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
 		String[] min = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
 		String[] amPM = {"AM", "PM"};
-		ChoiceDialog hours = new ChoiceDialog<>(hr[0], hr);
-		ChoiceDialog minutes = new ChoiceDialog<>(min[0], min);
-		ChoiceDialog pmAM = new ChoiceDialog<>(amPM[0], amPM);
+		ChoiceDialog<String> hours = new ChoiceDialog<>(hr[0], hr);
+		ChoiceDialog<String> minutes = new ChoiceDialog<>(min[0], min);
+		ChoiceDialog<String> pmAM = new ChoiceDialog<>(amPM[0], amPM);
 		if (boxHR.getValue().equals("HH")) {
 			hours.setHeaderText("Must enter number for HH:");
 			hours.showAndWait();
-			boxHR.setValue((String) hours.getSelectedItem());
+			boxHR.setValue(hours.getSelectedItem());
 		}
 		if (boxMin.getValue().equals("MM")) {
 			minutes.setHeaderText("Must enter number for MM:");
 			minutes.showAndWait();
-			boxMin.setValue((String) minutes.getSelectedItem());
+			boxMin.setValue(minutes.getSelectedItem());
 		}
 		if (boxAMPM.getValue().equals("AM/PM")) {
 			pmAM.setHeaderText("Must enter number for AM/PM:");
 			pmAM.showAndWait();
-			boxAMPM.setValue((String) pmAM.getSelectedItem());
+			boxAMPM.setValue(pmAM.getSelectedItem());
 		}
 	}
 
+	/**
+	 * Updates taskList with taskList from save state.
+	 *
+	 * @param taskDataList from save file / external source.
+	 */
 	public void loadTasks(ArrayList<TaskData> taskDataList) {
 		for (TaskData t : taskDataList) {
 			taskList.add(new TodoTask(t.title(), t.description(), t.completed(), t.date(), t.hourValue(), t.minValue()
@@ -189,18 +231,30 @@ public class TabTemplateController {
 		}
 	}
 
+	/**
+	 * Checks if date is selected.
+	 * If selected, user is allowed to input time.
+	 *
+	 * @param event calling MenuItem ActionEvent
+	 */
 	@FXML
 	private void displayTime(ActionEvent event) {
 		DatePicker date = (DatePicker) event.getSource();
 		setTimeVisible(date.getValue() != null);
 	}
 
+	/**
+	 * removes selected task from taskList
+	 */
 	@FXML
 	private void removeTask() {
 		TodoTask task = table.getSelectionModel().getSelectedItem();
 		table.getItems().remove(task);
 	}
 
+	/**
+	 * Marks selected task complete.
+	 */
 	@FXML
 	private void markCompleted() {
 		if (table.getSelectionModel().getSelectedItem() != null)
@@ -208,6 +262,11 @@ public class TabTemplateController {
 		taskSelected();
 	}
 
+	/**
+	 * Compiles all tab tasks into ArrayList for saving.
+	 *
+	 * @return {@code ArrayList<TaskData>}
+	 */
 	public ArrayList<TaskData> saveData() {
 		ArrayList<TaskData> taskDataList = new ArrayList<>();
 		for (TodoTask t : taskList) {
