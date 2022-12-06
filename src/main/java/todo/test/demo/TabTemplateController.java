@@ -8,7 +8,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TabTemplateController {
@@ -37,12 +36,14 @@ public class TabTemplateController {
 	private ChoiceBox<String> boxHR;
 	@FXML
 	private CheckBox chkCompleted;
+	private String theme;
 
 	@FXML
 	void initialize() {
 		setupTable();
 
 		setupDateTime();
+		theme = "LightTheme";
 	}
 
 	private void setupTable() {
@@ -124,29 +125,6 @@ public class TabTemplateController {
 		table.getSelectionModel().clearSelection();
 	}
 
-	private void dialogBoxOps(){
-		String[] hr = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
-		String[] min = {"00","05","10","15","20","25","30","35","40","45","50","55"};
-		String[] amPM = {"AM","PM"};
-		ChoiceDialog hours = new ChoiceDialog<>(hr[0],hr);
-		ChoiceDialog minutes = new ChoiceDialog<>(min[0],min);
-		ChoiceDialog pmAM = new ChoiceDialog<>(amPM[0],amPM);
-		if (boxHR.getValue().equals("HH")) {
-			hours.setHeaderText("Must enter number for HH:");
-			hours.showAndWait();
-			boxHR.setValue((String) hours.getSelectedItem());
-		}
-		if (boxMin.getValue().equals("MM")) {
-			minutes.setHeaderText("Must enter number for MM:");
-			minutes.showAndWait();
-			boxMin.setValue((String) minutes.getSelectedItem());
-		}
-		if (boxAMPM.getValue().equals("AM/PM")) {
-			pmAM.setHeaderText("Must enter number for AM/PM:");
-			pmAM.showAndWait();
-			boxAMPM.setValue((String) pmAM.getSelectedItem());
-		}
-	}
 	private void newTask() {
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
 			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
@@ -154,10 +132,9 @@ public class TabTemplateController {
 		else if ((boxHR.getValue().equals("HH") || boxMin.getValue().equals("MM") || boxAMPM.getValue().equals("AM/PM"))) {
 			// TODO: Throw error
 			dialogBoxOps();
-			//System.out.println("TIME ERROR");
 		}
 		taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
-								  datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
+		                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
 	}
 
 	private void updateTask() {
@@ -179,6 +156,30 @@ public class TabTemplateController {
 		tempTask.setDescription(txtTask.getText());
 		tempTask.setCompleted(chkCompleted.isSelected());
 		tempTask.setDate(datePicker.getValue());
+	}
+
+	private void dialogBoxOps() {
+		String[] hr = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"};
+		String[] min = {"00", "05", "10", "15", "20", "25", "30", "35", "40", "45", "50", "55"};
+		String[] amPM = {"AM", "PM"};
+		ChoiceDialog hours = new ChoiceDialog<>(hr[0], hr);
+		ChoiceDialog minutes = new ChoiceDialog<>(min[0], min);
+		ChoiceDialog pmAM = new ChoiceDialog<>(amPM[0], amPM);
+		if (boxHR.getValue().equals("HH")) {
+			hours.setHeaderText("Must enter number for HH:");
+			hours.showAndWait();
+			boxHR.setValue((String) hours.getSelectedItem());
+		}
+		if (boxMin.getValue().equals("MM")) {
+			minutes.setHeaderText("Must enter number for MM:");
+			minutes.showAndWait();
+			boxMin.setValue((String) minutes.getSelectedItem());
+		}
+		if (boxAMPM.getValue().equals("AM/PM")) {
+			pmAM.setHeaderText("Must enter number for AM/PM:");
+			pmAM.showAndWait();
+			boxAMPM.setValue((String) pmAM.getSelectedItem());
+		}
 	}
 
 	public void loadTasks(ArrayList<TaskData> taskDataList) {
@@ -214,5 +215,13 @@ public class TabTemplateController {
 			                              t.getHourValue(), t.getMinValue(), t.getTimeOfDay()));
 		}
 		return taskDataList;
+	}
+
+	public String getTheme() {
+		return theme;
+	}
+
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 }

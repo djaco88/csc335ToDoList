@@ -42,17 +42,21 @@ public class ToDoController {
 
 		SaveData saveData = (SaveData) oi.readObject();
 
-		for (TabData t : saveData.getTabs()) {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setController(new TabTemplateController());
-			Tab newTab = new Tab();
-			newTab.setContent(FXMLLoader.load(getClass().getResource("TabTemplate.fxml")));
-			newTab.setText(t.getName());
-			TabTemplateController temp = (TabTemplateController) newTab.getContent().getUserData();
-			temp.loadTasks(t.getTasks());
-			newTab.setOnClosed(e -> updateClosable());
-			tabPane.getTabs().add(tabPane.getTabs().size(), newTab);
-		}
+		if (saveData != null && saveData.getTabs() != null) {
+			tabPane.getTabs().clear();
+			for (TabData t : saveData.getTabs()) {
+				FXMLLoader loader = new FXMLLoader();
+				loader.setController(new TabTemplateController());
+				Tab newTab = new Tab();
+				newTab.setContent(FXMLLoader.load(getClass().getResource("TabTemplate.fxml")));
+				newTab.setText(t.getName());
+				TabTemplateController temp = (TabTemplateController) newTab.getContent().getUserData();
+				temp.loadTasks(t.getTasks());
+				newTab.setOnClosed(e -> updateClosable());
+				changeTheme(t.getTheme(), newTab, (AnchorPane) newTab.getContent());
+				tabPane.getTabs().add(tabPane.getTabs().size(), newTab);
+			}
+		} else addTab();
 		tabPane.getSelectionModel().selectLast();
 		updateClosable();
 	}
@@ -94,7 +98,7 @@ public class ToDoController {
 
 		for (Tab tab : tabPane.getTabs()) {
 			TabTemplateController temp = (TabTemplateController) tab.getContent().getUserData();
-			saveData.addTab(new TabData(tab.getText(), temp.saveData()));
+			saveData.addTab(new TabData(tab.getText(), temp.saveData(), temp.getTheme()));
 		}
 
 		o.writeObject(saveData);
@@ -108,8 +112,12 @@ public class ToDoController {
 		AnchorPane ap = (AnchorPane) tab.getContent();
 		ap.getStylesheets().clear();
 
+		changeTheme(callingItem.getId(), tab, ap);
+	}
+
+	private void changeTheme(String theme, Tab tab, AnchorPane ap) {
 		String style = null;
-		switch (callingItem.getId()) {
+		switch (theme) {
 			case "DarkTheme" -> {
 				style = "DarkTheme.css";
 				tab.setStyle("-fx-background-color: darkgray; ");
@@ -148,6 +156,8 @@ public class ToDoController {
 			}
 		}
 		ap.getStylesheets().add(getClass().getResource(style).toExternalForm());
+		TabTemplateController tabController = (TabTemplateController) tab.getContent().getUserData();
+		tabController.setTheme(theme);
 	}
 
 	public void renameTab() {

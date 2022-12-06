@@ -6,10 +6,12 @@ import java.util.ArrayList;
 public class TabData implements Serializable {
 	private final String name;
 	private final ArrayList<TaskData> tasks;
+	private final String theme;
 
-	public TabData(String name, ArrayList<TaskData> taskList) {
+	public TabData(String name, ArrayList<TaskData> taskList, String theme) {
 		this.name = name;
 		this.tasks = taskList;
+		this.theme = theme;
 	}
 
 	public String getName() {
@@ -20,4 +22,7 @@ public class TabData implements Serializable {
 		return tasks;
 	}
 
+	public String getTheme() {
+		return theme;
+	}
 }
