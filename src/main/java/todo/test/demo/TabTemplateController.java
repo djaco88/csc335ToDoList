@@ -8,6 +8,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.CheckBoxTableCell;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -72,6 +73,14 @@ public class TabTemplateController {
 	 */
 	private void setupDateTime() {
 		datePicker.setMaxWidth(110);
+		datePicker.setDayCellFactory(picker -> new DateCell() {
+			public void updateItem(LocalDate date, boolean empty) {
+				super.updateItem(date, empty);
+				LocalDate today = LocalDate.now();
+
+				setDisable(empty || date.compareTo(today) < 0);
+			}
+		});
 
 		setTimeVisible(false);
 		ObservableList<String> hourList = FXCollections.observableArrayList("HH");
@@ -148,8 +157,7 @@ public class TabTemplateController {
 		boolean clearText = true;
 		if (tempTask == null) {
 			clearText = newTask();
-		}
-		else {
+		} else {
 			clearText = updateTask();
 		}
 		if (clearText) {
@@ -164,7 +172,7 @@ public class TabTemplateController {
 	 * (HH - MM - AM/PM) must all be set to continue.
 	 */
 	private boolean newTask() {
-		if(txtTitle.getText().equals("")){
+		if (txtTitle.getText().equals("")) {
 			errorBoxOps();
 			return false;
 		}
@@ -185,7 +193,7 @@ public class TabTemplateController {
 	 * (HH - MM - AM/PM) must all be set to continue.
 	 */
 	private boolean updateTask() {
-		if(txtTitle.getText().equals("")){
+		if (txtTitle.getText().equals("")) {
 			errorBoxOps();
 			return false;
 		}
@@ -205,6 +213,14 @@ public class TabTemplateController {
 		tempTask.setCompleted(chkCompleted.isSelected());
 		tempTask.setDate(datePicker.getValue());
 		return true;
+	}
+
+	public void errorBoxOps() {
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle("Task Input Error");
+		alert.setHeaderText("Warning! \nTask wasn't saved!");
+		alert.setContentText("Please set a title for your task, and try again.");
+		alert.show();
 	}
 
 	/**
@@ -232,14 +248,6 @@ public class TabTemplateController {
 			pmAM.showAndWait();
 			boxAMPM.setValue(pmAM.getSelectedItem());
 		}
-	}
-
-	public void errorBoxOps(){
-		Alert alert = new Alert(Alert.AlertType.ERROR);
-		alert.setTitle("Task Input Error");
-		alert.setHeaderText("Warning! \nTask wasn't saved");
-		alert.setContentText("Please set a title for your task, and retry again.");
-		alert.show();
 	}
 
 	/**
