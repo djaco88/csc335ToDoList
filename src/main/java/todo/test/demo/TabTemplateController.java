@@ -165,7 +165,7 @@ public class TabTemplateController {
 	 */
 	private boolean newTask() {
 		if(txtTitle.getText().equals("")){
-			System.out.println("Task Must Have Title");
+			errorBoxOps();
 			return false;
 		}
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
@@ -186,7 +186,7 @@ public class TabTemplateController {
 	 */
 	private boolean updateTask() {
 		if(txtTitle.getText().equals("")){
-			System.out.println("Task Must Have Title");
+			errorBoxOps();
 			return false;
 		}
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
@@ -232,6 +232,14 @@ public class TabTemplateController {
 			pmAM.showAndWait();
 			boxAMPM.setValue(pmAM.getSelectedItem());
 		}
+	}
+
+	public void errorBoxOps(){
+		Alert alert = new Alert(Alert.AlertType.ERROR);
+		alert.setTitle("Task Input Error");
+		alert.setHeaderText("Warning! \nTask wasn't saved");
+		alert.setContentText("Please set a title for your task, and retry again.");
+		alert.show();
 	}
 
 	/**
