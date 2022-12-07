@@ -19,7 +19,7 @@ public class Main extends Application {
 		Scene scene = new Scene(fxmlLoader.load());
 		scene.getStylesheets().clear();
 		setUserAgentStylesheet(null);
-		stage.setTitle("ToDo Test");
+		stage.setTitle("To Do List");
 		stage.setScene(scene);
 		stage.show();
 	}
