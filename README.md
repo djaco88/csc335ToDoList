@@ -13,7 +13,7 @@ a program with a user friendly GUI that keeps track of tasks. Tasks can be added
 
 GUI Details:
 
-Exit GUI- either click the x on the top left of the GUI or click Close in the File dropdown menu
+Exit GUI- either click the x on the top corner of the GUI or click Close in the File dropdown menu
 
 Save- click save in the File dropdown menu
 
