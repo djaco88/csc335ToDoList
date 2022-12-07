@@ -218,17 +218,17 @@ public class TabTemplateController {
 		ChoiceDialog<String> minutes = new ChoiceDialog<>(min[0], min);
 		ChoiceDialog<String> pmAM = new ChoiceDialog<>(amPM[0], amPM);
 		if (boxHR.getValue().equals("HH")) {
-			hours.setHeaderText("Must enter number for HH:");
+			hours.setHeaderText("Must enter number for HH\n(default '01' will be applied if cancel is selected)");
 			hours.showAndWait();
 			boxHR.setValue(hours.getSelectedItem());
 		}
 		if (boxMin.getValue().equals("MM")) {
-			minutes.setHeaderText("Must enter number for MM:");
+			minutes.setHeaderText("Must enter number for MM\n(default '00' will be applied if cancel is selected)");
 			minutes.showAndWait();
 			boxMin.setValue(minutes.getSelectedItem());
 		}
 		if (boxAMPM.getValue().equals("AM/PM")) {
-			pmAM.setHeaderText("Must enter number for AM/PM:");
+			pmAM.setHeaderText("Must enter number for AM/PM\n(default 'AM' will be applied if cancel is selected)");
 			pmAM.showAndWait();
 			boxAMPM.setValue(pmAM.getSelectedItem());
 		}
