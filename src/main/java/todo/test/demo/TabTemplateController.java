@@ -145,11 +145,17 @@ public class TabTemplateController {
 	 */
 	@FXML
 	private void submitTask() {
-		if (tempTask == null) newTask();
-		else updateTask();
-
-		clearPrompts();
-		table.getSelectionModel().clearSelection();
+		boolean clearText = true;
+		if (tempTask == null) {
+			clearText = newTask();
+		}
+		else {
+			clearText = updateTask();
+		}
+		if (clearText) {
+			clearPrompts();
+			table.getSelectionModel().clearSelection();
+		}
 	}
 
 	/**
@@ -157,7 +163,11 @@ public class TabTemplateController {
 	 * If user only inputs 1 of the 3 time selections, dialog box will appear.
 	 * (HH - MM - AM/PM) must all be set to continue.
 	 */
-	private void newTask() {
+	private boolean newTask() {
+		if(txtTitle.getText().equals("")){
+			System.out.println("Task Must Have Title");
+			return false;
+		}
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM"))
 			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
 			                          datePicker.getValue()));
@@ -166,7 +176,7 @@ public class TabTemplateController {
 			taskList.add(new TodoTask(txtTitle.getText(), txtTask.getText(), chkCompleted.isSelected(),
 			                          datePicker.getValue(), boxHR.getValue(), boxMin.getValue(), boxAMPM.getValue()));
 		}
-
+		return true;
 	}
 
 	/**
@@ -174,7 +184,11 @@ public class TabTemplateController {
 	 * If user only inputs 1 of the 3 time selections, dialog box will appear.
 	 * (HH - MM - AM/PM) must all be set to continue.
 	 */
-	private void updateTask() {
+	private boolean updateTask() {
+		if(txtTitle.getText().equals("")){
+			System.out.println("Task Must Have Title");
+			return false;
+		}
 		if (boxHR.getValue().equals("HH") && boxMin.getValue().equals("MM") && boxAMPM.getValue().equals("AM/PM")) {
 			tempTask.setHourValue(null);
 			tempTask.setMinValue(null);
@@ -190,6 +204,7 @@ public class TabTemplateController {
 		tempTask.setDescription(txtTask.getText());
 		tempTask.setCompleted(chkCompleted.isSelected());
 		tempTask.setDate(datePicker.getValue());
+		return true;
 	}
 
 	/**
