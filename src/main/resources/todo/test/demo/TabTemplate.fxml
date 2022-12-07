@@ -22,6 +22,10 @@
                 <TableView id="TaskTable" fx:id="table" layoutX="-16.0" layoutY="77.0" prefHeight="373.0"
                            prefWidth="182.0" tableMenuButtonVisible="true" AnchorPane.bottomAnchor="0.0"
                            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-15.0" AnchorPane.topAnchor="0.0">
+
+                    <placeholder>
+                        <Label text="Your To-do list, is now a done list"/>
+                    </placeholder>
                     <contextMenu>
                         <ContextMenu>
                             <items>
@@ -64,7 +68,7 @@
             <ChoiceBox fx:id="boxMin" prefWidth="60.0"/>
             <ChoiceBox fx:id="boxAMPM" prefWidth="75.0"/>
             <CheckBox fx:id="chkCompleted" mnemonicParsing="false" onAction="#markCompleted" text="Completed"/>
-            <Button mnemonicParsing="false" onAction="#submitTask" text="Submit"/>
+            <Button mnemonicParsing="false" onAction="#submitTask" text="Add / Update"/>
             <!--    Formatting     -->
         </HBox>
     </SplitPane>
